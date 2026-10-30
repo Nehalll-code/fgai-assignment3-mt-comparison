@@ -68,15 +68,32 @@ def build_prompt(tok, src: str, shots: list[dict] | None = None) -> str:
 
 
 def clean_output(text: str) -> str:
-    """Reduce a free-form generation to a single translation line."""
-    text = text.strip()
-    # Instruct models sometimes continue with another example; keep the first line.
-    for stop in (f"\n{C.SRC_LANG_NAME}:", "\n\n"):
+    """Reduce a free-form generation to a single translation line.
+
+    Order matters here.  The preamble has to go *before* a line is selected,
+    because an instruct model often puts its preamble on its own line and the
+    translation on the next one - taking the first line first would throw the
+    translation away and keep "Here is the translation:".  And the preamble is
+    stripped repeatedly, because models stack them ("Sure! Here is the
+    translation:") and an anchored pattern only removes the leading one.
+    """
+    text = text.strip().strip("`").strip()
+
+    # A model that keeps going starts a new example; everything from there is
+    # not part of this translation.
+    for stop in (f"\n{C.SRC_LANG_NAME}:", f"\n{C.TGT_LANG_NAME}:"):
         if stop in text:
             text = text.split(stop)[0]
-    text = text.strip().strip("`")
-    text = _PREAMBLE.sub("", text).strip()
-    text = text.split("\n")[0].strip()
+
+    for _ in range(3):
+        stripped = _PREAMBLE.sub("", text).strip()
+        if stripped == text:
+            break
+        text = stripped
+
+    # First line with actual content: a preamble may have left a blank one.
+    text = next((line.strip() for line in text.split("\n") if line.strip()), "")
+
     if len(text) > 1 and text[0] == text[-1] and text[0] in "\"'“”":
         text = text[1:-1].strip()
     return text

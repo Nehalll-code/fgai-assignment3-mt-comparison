@@ -201,6 +201,7 @@ soft-capping is ignored by the fused attention kernels.
 | Same decoding | greedy (`do_sample=False`, no beam search) for all headline numbers |
 | Same length budget | `max_target_len = 64` tokens for every system |
 | Same metrics | one sacrebleu configuration, signatures recorded in `run_info.json` |
+| Same output cleaning | one minimal, documented rule per family: sentinel stripping for mT5, preamble stripping for the decoders |
 | Same timing method | CUDA-synchronised wall clock over the whole test set, same batch size |
 | One model in memory | each system is released before the next loads |
 
@@ -270,6 +271,18 @@ export HF_TOKEN=hf_xxx            # Windows PowerShell: $env:HF_TOKEN="hf_xxx"
 python -m src.run_all             # full study, writes everything under results/
 python scripts/update_readme.py   # inject the numbers into this README
 ```
+
+### Tests
+
+```bash
+python -m tests.test_pipeline_units
+```
+
+23 unit tests covering the text handling that sits between a model and its
+score — output cleaning, corpus filtering, the failure-mode flags and the
+metrics. No GPU, no downloads, a couple of seconds. A bug in any of these
+changes every reported number without raising anything, which is not something
+a three-hour GPU run should be the first to discover.
 
 Useful variations:
 
@@ -565,6 +578,8 @@ scripts/
   make_submission_doc.py build the submission .docx and .pdf
 notebooks/
   FGAI_Assignment3_MT_Comparison.ipynb    Colab-ready, runs the whole study
+tests/
+  test_pipeline_units.py  unit tests for cleaning, filtering, flags and metrics
 docs/
   responsible_ai.md      the full section-(iii) discussion
 results/                 all generated metrics, tables, plots and translations

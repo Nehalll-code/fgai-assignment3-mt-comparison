@@ -12,6 +12,7 @@ and decoded in fp32 even when a GPU is available.
 
 from __future__ import annotations
 
+import re
 import time
 
 import torch
@@ -20,6 +21,8 @@ from torch.utils.data import DataLoader, Dataset
 from src import config as C
 
 PREFIX = f"translate {C.SRC_LANG_NAME} to {C.TGT_LANG_NAME}: "
+SENTINEL = re.compile(r"<extra_id_\d+>")
+WHITESPACE = re.compile(r"\s+")
 ADAPTER_DIR = C.CHECKPOINT_DIR / "mt5_finetuned"
 
 
@@ -146,6 +149,19 @@ def finetune_mt5(splits: dict[str, list[dict]], force: bool = False) -> dict:
             "total_params": n_params, "trainable_params": n_params, "history": history}
 
 
+def clean_output(text: str) -> str:
+    """Strip mT5's span-corruption sentinels from a generation.
+
+    mT5 was pretrained only on span corruption, so when it is unsure it falls
+    back on emitting ``<extra_id_N>`` sentinels.  ``skip_special_tokens`` does
+    not always remove them, because the fast tokenizer does not register every
+    extra id as special.  This is the counterpart of the preamble stripping the
+    decoder-only models get, so all four systems receive the same minimal
+    amount of output cleaning.
+    """
+    return WHITESPACE.sub(" ", SENTINEL.sub(" ", text)).strip()
+
+
 @torch.no_grad()
 def translate(model, tok, sentences: list[str], batch_size: int | None = None,
               temperature: float = 0.0) -> list[str]:
@@ -163,5 +179,6 @@ def translate(model, tok, sentences: list[str], batch_size: int | None = None,
         else:
             gen_kwargs.update(do_sample=False)
         ids = model.generate(**enc, **gen_kwargs)
-        out.extend(t.strip() for t in tok.batch_decode(ids, skip_special_tokens=True))
+        out.extend(clean_output(t)
+                   for t in tok.batch_decode(ids, skip_special_tokens=True))
     return out
