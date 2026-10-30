@@ -193,6 +193,11 @@ def make_sft_collate(tok):
 # LoRA fine-tuning
 # --------------------------------------------------------------------------- #
 
+def _adapter_size(peft_model) -> int:
+    """Adapter parameter count, for a reloaded adapter whose weights are frozen."""
+    return sum(p.numel() for n, p in peft_model.named_parameters() if "lora_" in n)
+
+
 def finetune_decoder(which: str, splits: dict[str, list[dict]],
                      force: bool = False) -> dict:
     """LoRA fine-tune Llama or Gemma for English->Hindi translation."""
@@ -202,9 +207,25 @@ def finetune_decoder(which: str, splits: dict[str, list[dict]],
     C.ensure_dirs()
     model_id, is_fallback = resolve_model_id(which)
     out_dir = C.CHECKPOINT_DIR / f"{which}_lora"
+    cached = out_dir.exists() and not force
 
-    model, tok = load_causal(model_id, for_training=True)
+    # The base is loaded exactly once. Attaching a cached adapter to a second
+    # copy would put two 5 GB models on the GPU at the same time.
+    model, tok = load_causal(model_id, for_training=not cached)
     base_params = sum(p.numel() for p in model.parameters())
+
+    if cached:
+        from peft import PeftModel
+        model = PeftModel.from_pretrained(model, out_dir)
+        trainable = sum(p.numel() for p in model.parameters()
+                        if p.requires_grad) or _adapter_size(model)
+        tpath = out_dir / "train_time.txt"
+        train_time = float(tpath.read_text()) if tpath.exists() else float("nan")
+        print(f"[{which}] loaded LoRA adapter ({train_time:.0f}s of training)")
+        return {"model": model, "tokenizer": tok, "history": [],
+                "model_id": model_id, "is_fallback": is_fallback,
+                "total_params": base_params, "trainable_params": trainable,
+                "train_time_s": train_time}
 
     present = {n.split(".")[-1] for n, _ in model.named_modules()}
     targets = [t for t in LORA_TARGETS if t in present] or ["q_proj", "v_proj"]
@@ -236,15 +257,6 @@ def finetune_decoder(which: str, splits: dict[str, list[dict]],
 
     meta = {"model_id": model_id, "is_fallback": is_fallback,
             "total_params": base_params, "trainable_params": trainable}
-
-    if out_dir.exists() and not force:
-        from peft import PeftModel
-        base, tok = load_causal(model_id, for_training=False)
-        model = PeftModel.from_pretrained(base, out_dir)
-        tpath = out_dir / "train_time.txt"
-        meta["train_time_s"] = float(tpath.read_text()) if tpath.exists() else float("nan")
-        print(f"[{which}] loaded LoRA adapter ({meta['train_time_s']:.0f}s of training)")
-        return {"model": model, "tokenizer": tok, "history": [], **meta}
 
     loader = DataLoader(SFTDataset(splits["train"], tok),
                         batch_size=C.P.decoder_batch_size, shuffle=True,
