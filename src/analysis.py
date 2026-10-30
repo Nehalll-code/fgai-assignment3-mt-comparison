@@ -90,7 +90,16 @@ PROBE_SETS = {
 
 
 def all_probe_sentences() -> list[tuple[str, str]]:
-    return [(category, s) for category, items in PROBE_SETS.items() for s in items]
+    """The probe sentences, as (category, sentence) pairs.
+
+    The smoke profile keeps only two per category: the point there is that the
+    probing machinery runs, and generating 23 sentences per system on CPU is
+    most of that profile's runtime.
+    """
+    limit = 2 if C.SMOKE else None
+    return [(category, s)
+            for category, items in PROBE_SETS.items()
+            for s in items[:limit]]
 
 
 # --------------------------------------------------------------------------- #

@@ -8,8 +8,9 @@ Two run profiles exist:
 * ``full``  - the profile used for the numbers reported in the README.
               Needs a CUDA GPU (a free Colab T4 is enough).
 * ``smoke`` - a tiny CPU-only profile used to prove the pipeline executes
-              end to end.  It swaps all three pretrained checkpoints for
-              randomly initialised stand-ins of the same architecture, so the
+              end to end on a handful of sentences.  mT5 is the real
+              checkpoint; the two gated decoder-only models are replaced by
+              randomly initialised stand-ins of the same architecture.  The
               scores it produces are meaningless by construction.  It also
               writes to ``data_smoke/``, ``checkpoints_smoke/`` and
               ``results_smoke/`` so it can never touch a real run's output.
@@ -149,10 +150,10 @@ FULL = Profile(
 
 SMOKE_PROFILE = Profile(
     name="smoke",
-    n_train=400,
-    n_val=64,
-    n_test=24,
-    n_temp_sweep=8,
+    n_train=120,
+    n_val=24,
+    n_test=12,
+    n_temp_sweep=6,
     vocab_size=2_000,
     d_model=64,
     nhead=2,
@@ -162,9 +163,9 @@ SMOKE_PROFILE = Profile(
     scratch_epochs=2,
     scratch_batch_size=16,
     scratch_lr=1e-3,
-    # A randomly initialised tiny mT5 as well, so the smoke run takes minutes
-    # rather than half an hour of CPU time on the real 300M checkpoint.
-    mt5_id="hf-internal-testing/tiny-random-mt5",
+    # The real mT5 checkpoint, on a handful of pairs: cheap enough on CPU and
+    # it exercises the code path the full run uses, which a stand-in would not.
+    mt5_id="google/mt5-small",
     mt5_epochs=1,
     mt5_batch_size=4,
     mt5_lr=3e-4,

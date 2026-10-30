@@ -136,7 +136,10 @@ def plot_compute(rows: list[dict]) -> Path:
                       color=SERIES[0], linewidth=0)
         _annotate_bars(ax, bars, fmt)
         ax.set_xticks(list(x))
-        ax.set_xticklabels(labels, rotation=0)
+        # Six two-line labels do not fit a 4.6in panel horizontally.
+        rotation = 30 if len(rows) > 4 else 0
+        ax.set_xticklabels(labels, rotation=rotation,
+                           ha="right" if rotation else "center")
         ax.set_title(title)
         _ax_grid(ax, log=log)
         if log:
@@ -161,6 +164,9 @@ def plot_quality_vs_size(rows: list[dict]) -> Path:
                     textcoords="offset points", xytext=(8, 4),
                     fontsize=8, color=INK_SOFT)
     ax.set_xscale("log")
+    # Room for the point labels, which extend to the right of each marker.
+    ax.set_xmargin(0.3)
+    ax.margins(y=0.15)
     ax.set_xlabel("parameters (M, log scale)")
     ax.set_ylabel("chrF++")
     ax.set_title("Quality against model size")
