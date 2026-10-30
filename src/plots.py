@@ -170,7 +170,9 @@ def plot_quality_vs_size(rows: list[dict]) -> Path:
     ax.set_xlabel("parameters (M, log scale)")
     ax.set_ylabel("chrF++")
     ax.set_title("Quality against model size")
-    ax.legend(loc="lower right")
+    # Upper left: the point labels extend rightwards, so a right-hand legend
+    # collides with the lowest-scoring system's label.
+    ax.legend(loc="upper left")
     _ax_grid(ax)
     return _save(fig, "quality_vs_size.png")
 

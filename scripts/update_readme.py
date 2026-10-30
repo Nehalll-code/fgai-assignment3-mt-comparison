@@ -125,12 +125,18 @@ def block_temperature_summary() -> str:
         items.sort(key=lambda r: float(r["temperature"]))
         greedy = next((i for i in items if float(i["temperature"]) == 0.0), items[0])
         hottest = items[-1]
-        best = max(items, key=lambda r: float(r["chrf"]))
+        # "Best sampled" must exclude greedy, or it reports T=0 as the winner.
+        sampled = [i for i in items if float(i["temperature"]) > 0.0]
+        best = max(sampled, key=lambda r: float(r["chrf"])) if sampled else None
         g, h = float(greedy["chrf"]), float(hottest["chrf"])
         drop = (g - h) / g * 100 if g else 0.0
+        part = ""
+        if best is not None:
+            verdict = "still below greedy" if float(best["chrf"]) < g else "above greedy"
+            part = (f"best sampled setting T={float(best['temperature']):.1f} "
+                    f"(chrF++ {float(best['chrf']):.2f}, {verdict}); ")
         lines.append(
-            f"- **{model}** - greedy chrF++ {g:.2f}; best sampled setting "
-            f"T={float(best['temperature']):.1f} (chrF++ {float(best['chrf']):.2f}); "
+            f"- **{model}** - greedy chrF++ {g:.2f}; {part}"
             f"at T={float(hottest['temperature']):.1f} chrF++ falls to {h:.2f}, "
             f"a {drop:.0f}% relative loss."
         )
