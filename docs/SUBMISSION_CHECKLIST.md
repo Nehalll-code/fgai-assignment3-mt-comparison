@@ -24,12 +24,11 @@ runtime to **T4 GPU**, add the `HF_TOKEN` secret, and *Run all* (~2–3 hours).
 Then:
 
 1. Download `fgai_results.zip` from the last cell.
-2. Unzip it over the local clone, replacing `results/`, `README.md` and
-   `docs/responsible_ai.md`.
-3. `python scripts/update_readme.py` (idempotent).
-4. `python scripts/make_submission_doc.py` — rebuilds the .docx/.pdf, now
-   including the best-performing model line.
-5. `git add -A && git commit -m "results: full GPU run" && git push`
+2. `python scripts/import_results.py <path-to>/fgai_results.zip` — installs the
+   results, re-injects every number into `README.md` and
+   `docs/responsible_ai.md`, and rebuilds the .docx/.pdf with the
+   best-performing model line.
+3. `git add -A && git commit -m "results: full GPU run" && git push`
 
 Before the run, accept the two licences:
 

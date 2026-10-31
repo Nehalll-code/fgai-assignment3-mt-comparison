@@ -181,10 +181,13 @@ try {{
     try:
         subprocess.run(["powershell", "-NoProfile", "-NonInteractive",
                         "-Command", script],
-                       check=True, capture_output=True, timeout=180)
+                       check=True, capture_output=True, timeout=300)
         return pdf_path.exists()
     except Exception as exc:
-        print(f"[doc] Word conversion unavailable ({type(exc).__name__})")
+        # A Word instance that is already open and busy can block the COM call
+        # past the timeout; closing Word and re-running usually fixes it.
+        print(f"[doc] Word conversion unavailable ({type(exc).__name__}) - "
+              "if Word is open, close it and run this script again")
         return False
 
 

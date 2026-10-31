@@ -261,6 +261,17 @@ in Colab, set the runtime to **T4 GPU**, add the `HF_TOKEN` secret, and
 stage, displays the tables and figures inline, and refreshes this README's
 generated blocks at the end.
 
+When the notebook finishes, fold its `fgai_results.zip` back into a local
+clone with one command:
+
+```bash
+python scripts/import_results.py ~/Downloads/fgai_results.zip
+```
+
+That installs the results, re-injects every number into this README and
+`docs/responsible_ai.md`, and rebuilds the submission document. It validates
+every path in the archive before writing anything.
+
 **Option B — command line.**
 
 ```bash
@@ -575,7 +586,9 @@ src/
   run_all.py             end-to-end driver
 scripts/
   update_readme.py       inject results/ numbers into this README
+  import_results.py      fold a finished GPU run's zip back into the repo
   make_submission_doc.py build the submission .docx and .pdf
+  make_notebook.py       regenerate the Colab notebook from these modules
 notebooks/
   FGAI_Assignment3_MT_Comparison.ipynb    Colab-ready, runs the whole study
 tests/
