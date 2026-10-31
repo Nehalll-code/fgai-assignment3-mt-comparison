@@ -151,6 +151,20 @@ else:
     print("To fix: add a secret named HF_TOKEN, or set os.environ['HF_TOKEN'] here.")
 """))
 
+CELLS.append(md("""
+### Are the gated checkpoints actually reachable?
+
+A gated repository on Hugging Face is public metadata with private files, so a
+missing licence does not show up until something tries to download weights.
+This checks properly, in seconds, before anything long starts. If it reports
+`BLOCKED`, the run still completes — but it substitutes an open stand-in and
+says so in the report, which is probably not what the assignment wants.
+"""))
+
+CELLS.append(code("""
+!python scripts/check_access.py
+"""))
+
 CELLS.append(code("""
 import importlib
 import pandas as pd

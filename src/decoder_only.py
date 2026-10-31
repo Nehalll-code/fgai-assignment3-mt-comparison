@@ -120,27 +120,50 @@ def load_causal(model_id: str, for_training: bool):
     return model, tok
 
 
+def can_access(repo_id: str, token: str | None = None) -> tuple[bool, str]:
+    """Can this token actually *download* ``repo_id``? Returns (ok, reason).
+
+    A gated repository is public metadata with private files, so ``model_info``
+    succeeds on Llama and Gemma even with no token at all and is useless as an
+    access check.  ``auth_check`` is the call that enforces the gate; on hubs
+    too old to have it, fetching one small file does the same job.
+    """
+    token = token if token is not None else hf_token()
+    try:
+        from huggingface_hub import auth_check
+    except ImportError:
+        auth_check = None
+
+    try:
+        if auth_check is not None:
+            auth_check(repo_id, token=token)
+        else:
+            from huggingface_hub import hf_hub_download
+            hf_hub_download(repo_id, "config.json", token=token)
+        return True, ""
+    except Exception as exc:
+        return False, type(exc).__name__
+
+
 def resolve_model_id(which: str) -> tuple[str, bool]:
     """Return (model_id, is_fallback).
 
     The gated ``meta-llama``/``google`` checkpoints need an accepted licence and
-    a token.  If neither is present we fall back to an open checkpoint of the
-    same family so the notebook still runs, and the README records which was
+    a token.  If either is missing we fall back to an open checkpoint of the
+    same family so the run still finishes, and the README records which was
     used.
     """
-    from huggingface_hub import model_info
-
     primary = C.P.llama_id if which == "llama" else C.P.gemma_id
     fallback = C.P.fallback_llama_id if which == "llama" else C.P.fallback_gemma_id
     if primary == fallback:
         return primary, False
-    try:
-        model_info(primary, token=hf_token())
+
+    ok, reason = can_access(primary)
+    if ok:
         return primary, False
-    except Exception as exc:  # gated, missing token, or offline
-        print(f"[{which}] cannot access {primary} ({type(exc).__name__}); "
-              f"falling back to {fallback}")
-        return fallback, True
+    print(f"[{which}] cannot access {primary} ({reason}); "
+          f"falling back to {fallback}")
+    return fallback, True
 
 
 # --------------------------------------------------------------------------- #
