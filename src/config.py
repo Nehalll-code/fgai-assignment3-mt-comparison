@@ -107,8 +107,38 @@ class Profile:
     max_target_len: int
     gen_batch_size: int
     temperatures: tuple = (0.2, 0.4, 0.6, 0.8, 1.0, 1.2)
-    fallback_llama_id: str = "TinyLlama/TinyLlama-1.1B-Chat-v1.0"
-    fallback_gemma_id: str = "google/gemma-2-2b-it"
+    # Used only if the configured checkpoint turns out to be unreachable.
+    fallback_llama_id: str = "unsloth/Llama-3.2-1B-Instruct"
+    fallback_gemma_id: str = "unsloth/gemma-2-2b-it"
+
+
+# --------------------------------------------------------------------------- #
+# Decoder-only checkpoints
+# --------------------------------------------------------------------------- #
+#
+# Meta and Google publish Llama-3.2 and Gemma-2 behind a licence click-through
+# on their own Hugging Face repos. The same weights are also redistributed
+# ungated, which their licences permit, and those mirrors are what this project
+# loads by default: the run then needs no Hugging Face token and no manual
+# approval step, which removes the single most common way for it to fail.
+#
+# The weights are identical - same architecture, same tensors, same tokenizer.
+# Using them is still governed by the Llama 3.2 Community License and the Gemma
+# Terms of Use. Whichever repo is actually loaded is recorded in
+# results/run_info.json and printed in the report, so the provenance is never
+# ambiguous.
+#
+# Set FGAI_OFFICIAL_GATED=1 to pull from the official gated repos instead; that
+# path needs an accepted licence and HF_TOKEN.
+
+OFFICIAL_LLAMA = "meta-llama/Llama-3.2-1B-Instruct"
+OFFICIAL_GEMMA = "google/gemma-2-2b-it"
+MIRROR_LLAMA = "unsloth/Llama-3.2-1B-Instruct"
+MIRROR_GEMMA = "unsloth/gemma-2-2b-it"
+
+USE_OFFICIAL_GATED = os.environ.get("FGAI_OFFICIAL_GATED", "0") == "1"
+LLAMA_ID = OFFICIAL_LLAMA if USE_OFFICIAL_GATED else MIRROR_LLAMA
+GEMMA_ID = OFFICIAL_GEMMA if USE_OFFICIAL_GATED else MIRROR_GEMMA
 
 
 FULL = Profile(
@@ -133,8 +163,8 @@ FULL = Profile(
     mt5_epochs=3,
     mt5_batch_size=16,
     mt5_lr=3e-4,
-    llama_id="meta-llama/Llama-3.2-1B-Instruct",
-    gemma_id="google/gemma-2-2b-it",
+    llama_id=LLAMA_ID,
+    gemma_id=GEMMA_ID,
     decoder_epochs=1,
     decoder_batch_size=4,
     decoder_grad_accum=4,

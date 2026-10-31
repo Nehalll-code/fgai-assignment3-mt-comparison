@@ -174,6 +174,9 @@ Llama/Gemma comparison isolates the checkpoint rather than the recipe:
   projections (`q,k,v,o,gate,up,down`). The frozen base stays in fp16/bf16 while
   the LoRA parameters are held in fp32; training uses autocast with a gradient
   scaler.
+* **Checkpoints.** `unsloth/Llama-3.2-1B-Instruct` and `unsloth/gemma-2-2b-it`,
+  ungated redistributions of Meta's and Google's weights (see section 4). The
+  run records which repo it loaded.
 * **Tokenisation.** Each model's native tokeniser — and this is a substantive
   difference, not a detail. Llama-3's BPE vocabulary is heavily English-weighted
   and fragments Devanagari into many short pieces; Gemma's 256k vocabulary
@@ -242,20 +245,36 @@ billion-parameter decoders on CPU is not practical.
 Kaggle is the easier of the two for a run this long — sessions last up to 12
 hours, where free Colab disconnects when idle.
 
-### Gated checkpoints
+### Checkpoints — no Hugging Face token required
 
-`meta-llama/Llama-3.2-1B-Instruct` and `google/gemma-2-2b-it` are gated on
-Hugging Face. Before running:
+Meta and Google put Llama-3.2 and Gemma-2 behind a licence click-through on
+their own Hugging Face repos. The same weights are also redistributed ungated,
+which their licences permit, and **this project loads those mirrors by
+default**:
 
-1. Accept the licence on <https://huggingface.co/meta-llama/Llama-3.2-1B-Instruct>
-2. Accept the licence on <https://huggingface.co/google/gemma-2-2b-it>
-3. Create a **read** token at <https://huggingface.co/settings/tokens>
-4. Expose it as `HF_TOKEN` (in Colab: the key icon → secret named `HF_TOKEN`)
+| Model | Repo loaded by default | Official gated repo |
+|---|---|---|
+| Llama-3.2-1B-Instruct | `unsloth/Llama-3.2-1B-Instruct` | `meta-llama/Llama-3.2-1B-Instruct` |
+| Gemma-2-2B-IT | `unsloth/gemma-2-2b-it` | `google/gemma-2-2b-it` |
 
-If the token or a licence is missing, `src/decoder_only.py` reports it and falls
-back to an open checkpoint of the same family rather than crashing. Which
-checkpoint was actually used is recorded in `results/run_info.json` and in the
-table at the end of section 3.
+Same architecture, same tensors, same tokenizer — so the run needs **no token
+and no manual approval step**, which removes the most common way for it to
+fail. Use of the weights is still governed by the
+[Llama 3.2 Community License](https://www.llama.com/llama3_2/license/) and the
+[Gemma Terms of Use](https://ai.google.dev/gemma/terms) wherever they are
+downloaded from.
+
+To pull from the official gated repos instead, accept both licences, create a
+**read** token at <https://huggingface.co/settings/tokens>, expose it as
+`HF_TOKEN`, and set `FGAI_OFFICIAL_GATED=1`.
+
+Either way, the repo actually loaded is recorded in `results/run_info.json` and
+printed in the table at the end of section 3, so the provenance of every number
+is unambiguous. Check before a long run:
+
+```bash
+python scripts/check_access.py
+```
 
 ### Run it
 
@@ -269,14 +288,15 @@ README's generated blocks at the end.
 
 *On Kaggle:* set **Accelerator** to **GPU T4 x2** and **Internet** to **On** in
 the right-hand panel — internet is off by default, and without it nothing can
-be installed or downloaded. Add the token under **Add-ons → Secrets** as
-`HF_TOKEN` and attach it to the notebook. Both settings require a
-phone-verified account. Then **Run All**; collect `fgai_results.zip` from the
-**Output** panel.
+be installed or downloaded. Both settings require a phone-verified account.
+Then **Run All**; collect `fgai_results.zip` from the **Output** panel.
 
-*On Colab:* **Runtime → Change runtime type → T4 GPU**, add `HF_TOKEN` under the
-🔑 key icon with notebook access enabled, then **Runtime → Run all**. The last
-cell downloads `fgai_results.zip` to your browser.
+*On Colab:* **Runtime → Change runtime type → T4 GPU**, then
+**Runtime → Run all**. The last cell downloads `fgai_results.zip` to your
+browser.
+
+No Hugging Face token is needed on either platform unless you set
+`FGAI_OFFICIAL_GATED=1` (see above).
 
 When the notebook finishes, fold its `fgai_results.zip` back into a local
 clone with one command:

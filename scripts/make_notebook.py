@@ -47,35 +47,31 @@ This notebook runs the complete study end to end:
 Runs unchanged on **Kaggle** or **Google Colab**; the cells detect which one
 they are on. Expect roughly 2–3 hours on a T4.
 
-### Before you run — both platforms
+### Before you run
 
-1. Accept the licences for the two gated checkpoints (one click each, signed in
-   to Hugging Face):
-   * <https://huggingface.co/meta-llama/Llama-3.2-1B-Instruct>
-   * <https://huggingface.co/google/gemma-2-2b-it>
-2. Create a **read** token at <https://huggingface.co/settings/tokens>.
+**No Hugging Face account or token is needed.** Llama-3.2 and Gemma-2 are
+loaded from ungated mirrors of the same weights, so there is no licence form to
+fill in and nothing to approve. (To use Meta's and Google's own gated repos
+instead, accept both licences, add an `HF_TOKEN` secret, and set
+`FGAI_OFFICIAL_GATED=1` — see the README.)
 
 ### Kaggle
 
 * Right-hand panel → **Accelerator: GPU T4 x2** (or P100).
 * Right-hand panel → **Internet: On**. It is off by default, and without it the
   notebook cannot install anything or download the dataset.
-* Menu **Add-ons → Secrets** → add a secret named **`HF_TOKEN`** and attach it
-  to this notebook.
 * Both of those need a phone-verified Kaggle account.
 * **Run All.** Sessions last up to 12 hours, so the run fits comfortably.
 
 ### Colab
 
 * **Runtime → Change runtime type → T4 GPU.**
-* 🔑 key icon in the left sidebar → add a secret named **`HF_TOKEN`** with
-  notebook access enabled.
 * **Runtime → Run all.** Keep the tab open; free sessions disconnect when idle.
 
-If a licence or the token is missing, the decoder-only stages fall back to an
-open checkpoint of the same family and record that fact in
-`results/run_info.json` — the notebook will not crash, but the report will say
-a stand-in was used.
+If a checkpoint is unreachable for any reason, the decoder-only stages fall
+back to an open stand-in and record that in `results/run_info.json` — the
+notebook will not crash, but the report will say a stand-in was used. The
+pre-flight cell below checks this before anything expensive starts.
 
 If the session dies partway, re-run the setup cells and then only the stages
 that did not finish (`R.run_stage("gemma", splits, shots)`): the metrics table
@@ -125,8 +121,9 @@ print("working directory:", Path.cwd())
 """))
 
 CELLS.append(code("""
-# Hugging Face token for the two gated checkpoints. Colab keeps secrets behind
-# the key icon; Kaggle calls the same thing an Add-on ("Secrets" in the menu).
+# A token is optional: the default checkpoints are ungated mirrors. This only
+# matters with FGAI_OFFICIAL_GATED=1. Colab keeps secrets behind the key icon;
+# Kaggle calls the same thing an Add-on ("Secrets" in the menu).
 def load_hf_token():
     try:
         from google.colab import userdata
@@ -146,19 +143,16 @@ if token:
     os.environ["HF_TOKEN"] = token
     print(f"HF_TOKEN loaded from {where}")
 else:
-    print("No HF_TOKEN found. The gated Llama and Gemma checkpoints will be")
-    print("replaced by open stand-ins, and results/run_info.json will say so.")
-    print("To fix: add a secret named HF_TOKEN, or set os.environ['HF_TOKEN'] here.")
+    print("No HF_TOKEN set - not needed, the default checkpoints are ungated.")
 """))
 
 CELLS.append(md("""
 ### Are the gated checkpoints actually reachable?
 
-A gated repository on Hugging Face is public metadata with private files, so a
-missing licence does not show up until something tries to download weights.
-This checks properly, in seconds, before anything long starts. If it reports
-`BLOCKED`, the run still completes — but it substitutes an open stand-in and
-says so in the report, which is probably not what the assignment wants.
+Everything the run downloads, checked properly in a few seconds before
+anything long starts. With the default (ungated) checkpoints this should pass
+with no token. If anything reports `BLOCKED`, the run still completes — but it
+substitutes an open stand-in and says so in the report.
 """))
 
 CELLS.append(code("""

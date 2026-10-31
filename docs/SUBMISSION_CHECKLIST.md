@@ -27,7 +27,8 @@ On Kaggle also switch **Internet** to **On** in the right-hand panel; it is off
 by default and the notebook cannot download anything without it. Kaggle
 sessions last 12 hours, so the run fits in one sitting.
 
-Then:
+**No Hugging Face token or licence approval is needed** — Llama-3.2 and Gemma-2
+load from ungated mirrors of the same weights. Then:
 
 1. Download `fgai_results.zip` from the last cell.
 2. `python scripts/import_results.py <path-to>/fgai_results.zip` — installs the
@@ -35,11 +36,6 @@ Then:
    `docs/responsible_ai.md`, and rebuilds the .docx/.pdf with the
    best-performing model line.
 3. `git add -A && git commit -m "results: full GPU run" && git push`
-
-Before the run, accept the two licences:
-
-* <https://huggingface.co/meta-llama/Llama-3.2-1B-Instruct>
-* <https://huggingface.co/google/gemma-2-2b-it>
 
 ## Step 2 — Upload to GitHub ✅
 
