@@ -19,8 +19,14 @@ The assignment's five steps, mapped to what exists and what is left to do.
 | Program executes correctly and produces the reported results | smoke profile verified end to end on CPU | ✅ |
 
 **The one remaining task is the full run on a GPU.** Open
-`notebooks/FGAI_Assignment3_MT_Comparison.ipynb` in Google Colab, set the
-runtime to **T4 GPU**, add the `HF_TOKEN` secret, and *Run all* (~2–3 hours).
+`notebooks/FGAI_Assignment3_MT_Comparison.ipynb` on **Kaggle** or **Google
+Colab** — it detects which one it is on — attach a **T4**, add the `HF_TOKEN`
+secret, and *Run all* (~2–3 hours).
+
+On Kaggle also switch **Internet** to **On** in the right-hand panel; it is off
+by default and the notebook cannot download anything without it. Kaggle
+sessions last 12 hours, so the run fits in one sitting.
+
 Then:
 
 1. Download `fgai_results.zip` from the last cell.

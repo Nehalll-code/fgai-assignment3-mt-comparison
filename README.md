@@ -231,11 +231,16 @@ pip install -r requirements.txt
 
 ### Hardware
 
-The full profile needs a **CUDA GPU with ~16 GB** — a free Google Colab **T4**
-is sufficient and is what this project was designed around. The pipeline holds
-only one model in memory at a time specifically so that it fits. CPU-only
-execution is supported *for pipeline verification only* (see the smoke profile
-below); fine-tuning billion-parameter decoders on CPU is not practical.
+The full profile needs a **CUDA GPU with ~16 GB**. A free **Kaggle T4** or
+**Google Colab T4** is sufficient and is what this project was designed around:
+the pipeline holds only one model in memory at a time specifically so that it
+fits, and gradient checkpointing is on by default for the decoder stages so
+Gemma-2-2B does not overflow. CPU-only execution is supported *for pipeline
+verification only* (see the smoke profile below); fine-tuning
+billion-parameter decoders on CPU is not practical.
+
+Kaggle is the easier of the two for a run this long — sessions last up to 12
+hours, where free Colab disconnects when idle.
 
 ### Gated checkpoints
 
@@ -254,12 +259,24 @@ table at the end of section 3.
 
 ### Run it
 
-**Option A — the notebook (recommended).** Open
+**Option A — the notebook (recommended).**
 [`notebooks/FGAI_Assignment3_MT_Comparison.ipynb`](notebooks/FGAI_Assignment3_MT_Comparison.ipynb)
-in Colab, set the runtime to **T4 GPU**, add the `HF_TOKEN` secret, and
-*Run all*. It installs the dependencies, clones this repository, runs every
-stage, displays the tables and figures inline, and refreshes this README's
-generated blocks at the end.
+runs unchanged on Kaggle or Colab; its cells detect which platform they are on
+and find the working directory, the `HF_TOKEN` secret and the download
+mechanism accordingly. It installs the dependencies, clones this repository,
+runs every stage, displays the tables and figures inline, and refreshes this
+README's generated blocks at the end.
+
+*On Kaggle:* set **Accelerator** to **GPU T4 x2** and **Internet** to **On** in
+the right-hand panel — internet is off by default, and without it nothing can
+be installed or downloaded. Add the token under **Add-ons → Secrets** as
+`HF_TOKEN` and attach it to the notebook. Both settings require a
+phone-verified account. Then **Run All**; collect `fgai_results.zip` from the
+**Output** panel.
+
+*On Colab:* **Runtime → Change runtime type → T4 GPU**, add `HF_TOKEN` under the
+🔑 key icon with notebook access enabled, then **Runtime → Run all**. The last
+cell downloads `fgai_results.zip` to your browser.
 
 When the notebook finishes, fold its `fgai_results.zip` back into a local
 clone with one command:

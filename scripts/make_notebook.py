@@ -44,21 +44,42 @@ This notebook runs the complete study end to end:
 | (iii) | Profile failure modes, run the responsible-AI probe sets, and inspect the translations |
 | extra | Sampling-temperature sweep for every trained system |
 
-### Before you run
+Runs unchanged on **Kaggle** or **Google Colab**; the cells detect which one
+they are on. Expect roughly 2–3 hours on a T4.
 
-1. **Runtime → Change runtime type → T4 GPU.** The full profile needs a CUDA GPU.
-2. Accept the licences for the two gated checkpoints:
+### Before you run — both platforms
+
+1. Accept the licences for the two gated checkpoints (one click each, signed in
+   to Hugging Face):
    * <https://huggingface.co/meta-llama/Llama-3.2-1B-Instruct>
    * <https://huggingface.co/google/gemma-2-2b-it>
-3. Create a **read** token at <https://huggingface.co/settings/tokens>, then in
-   Colab click the 🔑 key icon in the left sidebar and add a secret named
-   **`HF_TOKEN`** with notebook access enabled.
-4. **Runtime → Run all.** Expect roughly 1.5–3 hours on a T4.
+2. Create a **read** token at <https://huggingface.co/settings/tokens>.
+
+### Kaggle
+
+* Right-hand panel → **Accelerator: GPU T4 x2** (or P100).
+* Right-hand panel → **Internet: On**. It is off by default, and without it the
+  notebook cannot install anything or download the dataset.
+* Menu **Add-ons → Secrets** → add a secret named **`HF_TOKEN`** and attach it
+  to this notebook.
+* Both of those need a phone-verified Kaggle account.
+* **Run All.** Sessions last up to 12 hours, so the run fits comfortably.
+
+### Colab
+
+* **Runtime → Change runtime type → T4 GPU.**
+* 🔑 key icon in the left sidebar → add a secret named **`HF_TOKEN`** with
+  notebook access enabled.
+* **Runtime → Run all.** Keep the tab open; free sessions disconnect when idle.
 
 If a licence or the token is missing, the decoder-only stages fall back to an
 open checkpoint of the same family and record that fact in
 `results/run_info.json` — the notebook will not crash, but the report will say
 a stand-in was used.
+
+If the session dies partway, re-run the setup cells and then only the stages
+that did not finish (`R.run_stage("gemma", splits, shots)`): the metrics table
+carries the completed systems forward.
 
 Repository: {REPO_URL}
 """))
@@ -81,7 +102,16 @@ import os, sys, subprocess
 from pathlib import Path
 
 REPO_URL = "{REPO_URL}"
-REPO_DIR = Path("/content/{REPO_DIR}")
+
+# Kaggle only lets a notebook write under /kaggle/working; Colab uses /content.
+for WORKDIR in (Path("/kaggle/working"), Path("/content")):
+    if WORKDIR.is_dir():
+        break
+else:
+    WORKDIR = Path.cwd()
+PLATFORM = {{"/kaggle/working": "Kaggle", "/content": "Colab"}}.get(
+    WORKDIR.as_posix(), "local")
+REPO_DIR = WORKDIR / "{REPO_DIR}"
 
 if REPO_DIR.exists():
     subprocess.run(["git", "-C", str(REPO_DIR), "pull", "--ff-only"], check=False)
@@ -90,18 +120,35 @@ else:
 
 os.chdir(REPO_DIR)
 sys.path.insert(0, str(REPO_DIR))
+print(f"platform: {{PLATFORM}}")
 print("working directory:", Path.cwd())
 """))
 
 CELLS.append(code("""
-# Hugging Face token for the two gated checkpoints.
-try:
-    from google.colab import userdata
-    os.environ["HF_TOKEN"] = userdata.get("HF_TOKEN")
-    print("HF_TOKEN loaded from Colab secrets")
-except Exception as exc:
-    print(f"No Colab secret found ({type(exc).__name__}).")
-    print("Set os.environ['HF_TOKEN'] = '...' manually, or accept the open-checkpoint fallback.")
+# Hugging Face token for the two gated checkpoints. Colab keeps secrets behind
+# the key icon; Kaggle calls the same thing an Add-on ("Secrets" in the menu).
+def load_hf_token():
+    try:
+        from google.colab import userdata
+        return userdata.get("HF_TOKEN"), "Colab secrets"
+    except Exception:
+        pass
+    try:
+        from kaggle_secrets import UserSecretsClient
+        return UserSecretsClient().get_secret("HF_TOKEN"), "Kaggle secrets"
+    except Exception:
+        pass
+    return os.environ.get("HF_TOKEN"), "the HF_TOKEN environment variable"
+
+
+token, where = load_hf_token()
+if token:
+    os.environ["HF_TOKEN"] = token
+    print(f"HF_TOKEN loaded from {where}")
+else:
+    print("No HF_TOKEN found. The gated Llama and Gemma checkpoints will be")
+    print("replaced by open stand-ins, and results/run_info.json will say so.")
+    print("To fix: add a secret named HF_TOKEN, or set os.environ['HF_TOKEN'] here.")
 """))
 
 CELLS.append(code("""
@@ -325,24 +372,40 @@ CELLS.append(code("""
 """))
 
 CELLS.append(code("""
-!zip -qr /content/fgai_results.zip results README.md docs/responsible_ai.md
+import zipfile
+
+archive = WORKDIR / "fgai_results.zip"
+with zipfile.ZipFile(archive, "w", zipfile.ZIP_DEFLATED) as z:
+    for path in sorted((REPO_DIR / "results").rglob("*")):
+        if path.is_file():
+            z.write(path, path.relative_to(REPO_DIR).as_posix())
+    for extra in ("README.md", "docs/responsible_ai.md"):
+        z.write(REPO_DIR / extra, extra)
+print(f"wrote {archive} ({archive.stat().st_size / 1e6:.1f} MB)")
+
 try:
     from google.colab import files
-    files.download("/content/fgai_results.zip")
-except Exception as exc:
-    print(f"Download the zip from the file browser ({type(exc).__name__}).")
+    files.download(str(archive))
+except Exception:
+    print("On Kaggle: open the Output panel on the right (or Data > Output)")
+    print("and download fgai_results.zip from there.")
 """))
 
 CELLS.append(md("""
 ### After this notebook
 
-1. Download `fgai_results.zip` (the cell above).
-2. In the local clone, replace `results/` with the version from the zip and copy
-   over the updated `README.md` and `docs/responsible_ai.md`.
-3. `python scripts/update_readme.py` (no-op if the zip already contains them).
-4. `git add -A && git commit -m "results: full GPU run" && git push`
-5. `python scripts/make_submission_doc.py` to rebuild the submission .docx/.pdf
-   with the final repository link, then upload the PDF to the LMS.
+1. Download `fgai_results.zip` — on Colab the cell above pushes it to your
+   browser; on Kaggle take it from the **Output** panel on the right.
+2. In the local clone, one command installs it, re-injects every number into
+   `README.md` and `docs/responsible_ai.md`, and rebuilds the submission
+   document:
+
+   ```bash
+   python scripts/import_results.py <path-to>/fgai_results.zip
+   ```
+
+3. `git add -A && git commit -m "results: full GPU run" && git push`
+4. Upload `docs/NehalVerma_230953144_FGAI_Assignment3.pdf` to the LMS.
 """))
 
 
