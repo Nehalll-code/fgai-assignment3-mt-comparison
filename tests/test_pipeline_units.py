@@ -174,6 +174,34 @@ def test_perfect_translation_scores_100():
     assert s["chrf"] > 99.0, s["chrf"]
 
 
+def test_training_schedule_keeps_the_effective_batch_identical():
+    """Whatever the per-model batch, both decoders must train under one recipe.
+
+    If the effective batch differed between Llama and Gemma, the comparison
+    would be measuring the schedule as well as the checkpoint.
+    """
+    from src import config as C
+
+    effective = C.P.decoder_batch_size * C.P.decoder_grad_accum
+    for params in (1.2e9, 2.6e9, 1e6, 7e9):
+        batch, accum, _ = DO.training_schedule(params)
+        assert batch * accum == effective, (params, batch, accum, effective)
+        assert batch >= 1 and accum >= 1
+
+
+def test_training_schedule_only_checkpoints_the_large_model():
+    _, _, small = DO.training_schedule(1.24e9)   # Llama-3.2-1B
+    _, _, large = DO.training_schedule(2.61e9)   # Gemma-2-2B
+    assert small is False
+    assert large is True
+
+
+def test_training_schedule_gives_the_small_model_the_bigger_batch():
+    small_batch, _, _ = DO.training_schedule(1.24e9)
+    large_batch, _, _ = DO.training_schedule(2.61e9)
+    assert small_batch >= large_batch
+
+
 def test_torchao_guard_neutralises_a_raising_availability_check():
     """peft raises instead of returning False when torchao is too old.
 

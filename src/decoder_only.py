@@ -216,6 +216,33 @@ def make_sft_collate(tok):
 # LoRA fine-tuning
 # --------------------------------------------------------------------------- #
 
+BIG_MODEL_PARAMS = 1.5e9
+
+
+def training_schedule(base_params: int) -> tuple[int, int, bool]:
+    """Pick (batch_size, grad_accum, is_big) for a decoder of this size.
+
+    Gradient checkpointing buys several GB of activation memory and costs
+    roughly a third of the step time.  Gemma-2-2B on a 16 GB T4 needs that
+    trade; a 1B model has memory to spare and would only pay the cost.  The
+    same reasoning applies to the batch size - the smaller model takes twice
+    the batch, which halves the number of forward/backward passes and keeps the
+    GPU better fed.
+
+    The accumulation factor moves with the batch size so the **effective**
+    batch is unchanged.  That matters: it is what keeps the optimisation recipe
+    identical between the two decoder-only systems, so the comparison still
+    measures the checkpoint rather than the schedule.  The batch is only
+    doubled when it still divides the effective batch exactly.
+    """
+    effective = C.P.decoder_batch_size * C.P.decoder_grad_accum
+    big = base_params > BIG_MODEL_PARAMS
+    batch_size = C.P.decoder_batch_size
+    if not big and effective % (batch_size * 2) == 0:
+        batch_size *= 2
+    return batch_size, max(1, effective // batch_size), big
+
+
 def skip_torchao_dispatch() -> None:
     """Stop peft's LoRA dispatcher from raising on an out-of-date torchao.
 
@@ -297,12 +324,14 @@ def finetune_decoder(which: str, splits: dict[str, list[dict]],
         if p.requires_grad:
             p.data = p.data.float()
 
-    # Gradient checkpointing costs roughly a third of the step time and buys
-    # several GB of activation memory.  On a 16 GB T4 that is the difference
-    # between Gemma-2-2B fitting and a three-hour run dying with an OOM, so it
-    # is on by default whenever a GPU is in use.  ``enable_input_require_grads``
-    # is required for it to work with a frozen base and LoRA adapters.
-    if C.DEVICE == "cuda":
+    # Gradient checkpointing buys several GB of activation memory and costs
+    # roughly a third of the step time.  Gemma-2-2B on a 16 GB T4 needs that
+    # trade; a 1B model has memory to spare and only pays the cost, so the
+    # decision follows the model's size rather than applying to everything.
+    # ``enable_input_require_grads`` is required for checkpointing to work with
+    # a frozen base and LoRA adapters.
+    batch_size, accum, big = training_schedule(base_params)
+    if C.DEVICE == "cuda" and big:
         model.enable_input_require_grads()
         model.gradient_checkpointing_enable(
             gradient_checkpointing_kwargs={"use_reentrant": False})
@@ -312,20 +341,22 @@ def finetune_decoder(which: str, splits: dict[str, list[dict]],
     print(f"[{which}] {model_id}: base={base_params / 1e6:.0f}M, "
           f"LoRA trainable={trainable / 1e6:.2f}M "
           f"({100 * trainable / base_params:.2f}% of base)")
+    print(f"[{which}] batch={batch_size} x accum={accum} "
+          f"(effective {batch_size * accum}), "
+          f"gradient checkpointing {'on' if (C.DEVICE == 'cuda' and big) else 'off'}")
 
     meta = {"model_id": model_id, "is_fallback": is_fallback,
             "total_params": base_params, "trainable_params": trainable}
 
     loader = DataLoader(SFTDataset(splits["train"], tok),
-                        batch_size=C.P.decoder_batch_size, shuffle=True,
+                        batch_size=batch_size, shuffle=True,
                         collate_fn=make_sft_collate(tok))
     val_loader = DataLoader(SFTDataset(splits["val"], tok),
-                            batch_size=C.P.decoder_batch_size, shuffle=False,
+                            batch_size=batch_size, shuffle=False,
                             collate_fn=make_sft_collate(tok))
 
     optimiser = torch.optim.AdamW(
         [p for p in model.parameters() if p.requires_grad], lr=C.P.decoder_lr)
-    accum = C.P.decoder_grad_accum
     total_steps = max(1, (len(loader) // accum) * C.P.decoder_epochs)
     scheduler = torch.optim.lr_scheduler.OneCycleLR(
         optimiser, max_lr=C.P.decoder_lr, total_steps=total_steps, pct_start=0.05)
@@ -375,7 +406,7 @@ def finetune_decoder(which: str, splits: dict[str, list[dict]],
 
     # Back to inference settings: the KV cache is what makes generation fast,
     # and checkpointing is pointless once there are no activations to keep.
-    if C.DEVICE == "cuda":
+    if C.DEVICE == "cuda" and big:
         model.gradient_checkpointing_disable()
     model.config.use_cache = True
     meta["train_time_s"] = train_time
