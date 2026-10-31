@@ -216,6 +216,40 @@ def make_sft_collate(tok):
 # LoRA fine-tuning
 # --------------------------------------------------------------------------- #
 
+def skip_torchao_dispatch() -> None:
+    """Stop peft's LoRA dispatcher from raising on an out-of-date torchao.
+
+    ``peft.import_utils.is_torchao_available`` *raises* ImportError when torchao
+    is installed but older than peft's minimum, rather than reporting False.
+    Every LoRA module build goes through a dispatcher that calls it, so on an
+    image with that combination - Kaggle ships torchao 0.10.0 against a peft
+    wanting >= 0.16 - ``get_peft_model`` dies, and it dies *after* the 2.5 GB
+    checkpoint has downloaded.
+
+    Nothing in this project uses torchao-quantised layers, so the correct answer
+    for this pipeline is "not available", which makes the dispatcher skip. The
+    dispatch module binds the name directly (``from peft.import_utils import
+    is_torchao_available``), so that binding is the one that has to be replaced.
+    """
+    try:
+        from peft import import_utils
+        from peft.tuners.lora import torchao as lora_torchao
+    except Exception:
+        return
+
+    try:
+        import_utils.is_torchao_available()
+        return                      # healthy, or genuinely absent - leave it be
+    except ImportError as exc:
+        print(f"[peft] {exc}")
+        print("[peft] skipping the torchao LoRA dispatcher; it is unused here")
+    except Exception:
+        return
+
+    import_utils.is_torchao_available = lambda: False
+    lora_torchao.is_torchao_available = lambda: False
+
+
 def _adapter_size(peft_model) -> int:
     """Adapter parameter count, for a reloaded adapter whose weights are frozen."""
     return sum(p.numel() for n, p in peft_model.named_parameters() if "lora_" in n)
@@ -226,6 +260,7 @@ def finetune_decoder(which: str, splits: dict[str, list[dict]],
     """LoRA fine-tune Llama or Gemma for English->Hindi translation."""
     from peft import LoraConfig, get_peft_model
 
+    skip_torchao_dispatch()
     torch.manual_seed(C.SEED)
     C.ensure_dirs()
     model_id, is_fallback = resolve_model_id(which)

@@ -174,6 +174,54 @@ def test_perfect_translation_scores_100():
     assert s["chrf"] > 99.0, s["chrf"]
 
 
+def test_torchao_guard_neutralises_a_raising_availability_check():
+    """peft raises instead of returning False when torchao is too old.
+
+    That kills every LoRA build on images like Kaggle's, after the checkpoint
+    has already downloaded. The guard must turn it into a plain False.
+    """
+    from peft import import_utils
+    from peft.tuners.lora import torchao as lora_torchao
+
+    original = (import_utils.is_torchao_available,
+                lora_torchao.is_torchao_available)
+
+    def raises_like_kaggle():
+        raise ImportError("Found an incompatible version of torchao. Found "
+                          "version 0.10.0, but only versions above 0.16.0 are "
+                          "supported")
+
+    try:
+        import_utils.is_torchao_available = raises_like_kaggle
+        lora_torchao.is_torchao_available = raises_like_kaggle
+
+        DO.skip_torchao_dispatch()
+
+        # The binding the dispatcher actually calls must now be harmless.
+        assert lora_torchao.is_torchao_available() is False
+        assert import_utils.is_torchao_available() is False
+    finally:
+        import_utils.is_torchao_available = original[0]
+        lora_torchao.is_torchao_available = original[1]
+
+
+def test_torchao_guard_leaves_a_healthy_check_alone():
+    from peft import import_utils
+    from peft.tuners.lora import torchao as lora_torchao
+
+    original = (import_utils.is_torchao_available,
+                lora_torchao.is_torchao_available)
+    sentinel = lambda: True  # noqa: E731
+    try:
+        import_utils.is_torchao_available = sentinel
+        lora_torchao.is_torchao_available = sentinel
+        DO.skip_torchao_dispatch()
+        assert lora_torchao.is_torchao_available is sentinel
+    finally:
+        import_utils.is_torchao_available = original[0]
+        lora_torchao.is_torchao_available = original[1]
+
+
 def test_slug_is_filesystem_safe():
     assert E._slug("Llama-3.2-1B (3-shot prompt)") == "llama_3_2_1b_3_shot_prompt"
 
