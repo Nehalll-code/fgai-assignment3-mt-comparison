@@ -1,0 +1,116 @@
+{
+  "finished_utc": "2026-11-01T01:25:48+00:00",
+  "wall_clock_s": 0.0,
+  "profile": "full",
+  "device": "cuda",
+  "gpu": "Tesla T4",
+  "dtype": "bfloat16",
+  "python": "3.13.15",
+  "platform": "Linux-6.18.55+-x86_64-with-glibc2.39",
+  "torch": "2.11.0+cu128",
+  "transformers": "5.16.1",
+  "peft": "0.20.0",
+  "sacrebleu": "2.6.0",
+  "dataset": {
+    "id": "Helsinki-NLP/opus-100",
+    "config": "en-hi",
+    "url": "https://huggingface.co/datasets/Helsinki-NLP/opus-100"
+  },
+  "split_sizes": {
+    "test": 500,
+    "val": 1000,
+    "train": 20000
+  },
+  "corpus_stats": {
+    "test": {
+      "pairs": 500,
+      "src_mean_words": 7.622,
+      "tgt_mean_words": 8.76,
+      "src_mean_chars": 41.156,
+      "tgt_mean_chars": 41.67,
+      "src_max_words": 41,
+      "tgt_max_words": 42,
+      "src_vocab": 1688,
+      "tgt_vocab": 1840
+    },
+    "val": {
+      "pairs": 1000,
+      "src_mean_words": 8.568,
+      "tgt_mean_words": 9.779,
+      "src_mean_chars": 46.047,
+      "tgt_mean_chars": 46.967,
+      "src_max_words": 36,
+      "tgt_max_words": 45,
+      "src_vocab": 3127,
+      "tgt_vocab": 3313
+    },
+    "train": {
+      "pairs": 20000,
+      "src_mean_words": 8.7763,
+      "tgt_mean_words": 10.2316,
+      "src_mean_chars": 47.6806,
+      "tgt_mean_chars": 49.33755,
+      "src_max_words": 42,
+      "tgt_max_words": 48,
+      "src_vocab": 24243,
+      "tgt_vocab": 22264
+    }
+  },
+  "bleu_tokenize": "intl",
+  "bleu_signature": "nrefs:1|case:mixed|eff:no|tok:intl|smooth:exp|version:2.6.0",
+  "chrf_signature": "nrefs:1|case:mixed|eff:yes|nc:6|nw:2|space:no|version:2.6.0",
+  "few_shot_examples": [
+    {
+      "src": "And it does not befit the Most Gracious to choose an offspring!",
+      "tgt": "जबकि रहमान की प्रतिष्ठा के प्रतिकूल है कि वह किसी को अपना बेटा बनाए"
+    },
+    {
+      "src": "And comforts of life wherein they used to take delight!",
+      "tgt": "जिनमें वह ऐश और चैन किया करते थे छोड़ गये यूँ ही हुआ"
+    },
+    {
+      "src": "So they pursued them at sunrise.",
+      "tgt": "ग़रज़ (मूसा) तो रात ही को चले गए"
+    }
+  ],
+  "checkpoints": {
+    "Transformer (scratch)": {
+      "checkpoint": "custom 3+3 layers, d_model=256, joint BPE 16000",
+      "is_fallback": false,
+      "adaptation": "trained from scratch"
+    },
+    "mT5-small (fine-tuned)": {
+      "checkpoint": "google/mt5-small",
+      "is_fallback": false,
+      "adaptation": "full fine-tuning"
+    },
+    "Llama-3.2-1B (LoRA)": {
+      "checkpoint": "unsloth/Llama-3.2-1B-Instruct",
+      "is_fallback": false,
+      "adaptation": "LoRA r=16"
+    },
+    "Gemma-2-2B (LoRA)": {
+      "checkpoint": "unsloth/gemma-2-2b-it",
+      "is_fallback": false,
+      "adaptation": "LoRA r=16"
+    },
+    "Llama-3.2-1B (3-shot prompt)": {
+      "checkpoint": "unsloth/Llama-3.2-1B-Instruct",
+      "is_fallback": false,
+      "adaptation": "3-shot prompting (no weight update)"
+    },
+    "Gemma-2-2B (3-shot prompt)": {
+      "checkpoint": "unsloth/gemma-2-2b-it",
+      "is_fallback": false,
+      "adaptation": "3-shot prompting (no weight update)"
+    }
+  },
+  "stages": [
+    "scratch",
+    "mt5",
+    "llama",
+    "gemma",
+    "llama_prompt",
+    "gemma_prompt"
+  ]
+}

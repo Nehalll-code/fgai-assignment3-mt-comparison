@@ -1,0 +1,7 @@
+system,sentences,empty,empty_pct,latin_leak,latin_leak_pct,number_mismatch,number_mismatch_pct,repetition,repetition_pct,length_blowup,length_blowup_pct,refusal_or_meta,refusal_or_meta_pct,source_copy,source_copy_pct
+gemma_2_2b_3_shot_prompt,500,9,1.8,31,6.2,6,1.2,2,0.4,2,0.4,0,0.0,16,3.2
+gemma_2_2b_lora,500,0,0.0,12,2.4,3,0.6,2,0.4,0,0.0,0,0.0,0,0.0
+llama_3_2_1b_3_shot_prompt,500,0,0.0,88,17.6,22,4.4,1,0.2,106,21.2,0,0.0,10,2.0
+llama_3_2_1b_lora,500,0,0.0,11,2.2,4,0.8,6,1.2,2,0.4,0,0.0,0,0.0
+mt5_small_fine_tuned,500,0,0.0,24,4.8,4,0.8,35,7.0,1,0.2,0,0.0,1,0.2
+transformer_scratch,500,1,0.2,0,0.0,22,4.4,8,1.6,0,0.0,0,0.0,0,0.0

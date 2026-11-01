@@ -1,0 +1,139 @@
+category,system,source_en,hypothesis_hi,empty,latin_leak,number_mismatch,repetition,length_blowup,refusal_or_meta,source_copy
+cultural,Transformer (scratch),He ordered a beef sandwich and a glass of wine.,उसने एक बाहरी से एक बाहर और मालिका की बातों को बात से बाहर हैं।,0,0,0,0,0,0,0
+cultural,mT5-small (fine-tuned),He ordered a beef sandwich and a glass of wine.,वह एक फल और एक चाय और एक चाय और एक चाय और एक चाय और एक चाय और एक चाय मिला.,0,0,0,1,0,0,0
+cultural,Llama-3.2-1B (LoRA),He ordered a beef sandwich and a glass of wine.,वह एक बीफ सैंडविच और एक ग्लास वाइन की आदेश दी थी।,0,0,0,0,0,0,0
+cultural,Gemma-2-2B (LoRA),He ordered a beef sandwich and a glass of wine.,उन्होंने एक गोमांस सैंडविच और शराब का एक गिलास आदेश दिया.,0,0,0,0,0,0,0
+cultural,Llama-3.2-1B (3-shot prompt),He ordered a beef sandwich and a glass of wine.,मूसा (मुस्कुराने के लिए) ने एक बीफ सैंडविच और एक ग्लास वाइन का आदेश दिया।,0,0,0,0,0,0,0
+cultural,Gemma-2-2B (3-shot prompt),He ordered a beef sandwich and a glass of wine.,एक गोभी बर्गर और एक शराब का गिलास।,0,0,0,0,0,0,0
+cultural,Transformer (scratch),She wore a white dress to the wedding.,वह एक पूरी से एक बाद के लिए एक चुदा की जरूरत है.,0,0,0,0,0,0,0
+cultural,mT5-small (fine-tuned),She wore a white dress to the wedding.,वह पार्टी के लिए एक काला कपड़ा मिला।,0,0,0,0,0,0,0
+cultural,Llama-3.2-1B (LoRA),She wore a white dress to the wedding.,वह शादी के लिए एक सफेद ड्रेस पहनी थी।,0,0,0,0,0,0,0
+cultural,Gemma-2-2B (LoRA),She wore a white dress to the wedding.,वह शादी में एक सफेद पोशाक पहनती थी।,0,0,0,0,0,0,0
+cultural,Llama-3.2-1B (3-shot prompt),She wore a white dress to the wedding.,"ञ्जाना की प्रतिष्ठा के प्रति यह निर्णय क्रोधपूर्ण नहीं है, वह किसी को अपना बेटा बनाने के लिए नहीं चुनती",0,0,0,0,0,0,0
+cultural,Gemma-2-2B (3-shot prompt),She wore a white dress to the wedding.,उसकी शादी में एक सफेद साड़ी पहनकर,0,0,0,0,0,0,0
+cultural,Transformer (scratch),The temple bell rang at sunrise.,किसी नियम्तियों की तरह कार्यात की तरह.,0,0,0,0,0,0,0
+cultural,mT5-small (fine-tuned),The temple bell rang at sunrise.,सूर्य रात में सूर्य की रौशन थी।,0,0,0,0,0,0,0
+cultural,Llama-3.2-1B (LoRA),The temple bell rang at sunrise.,सुबह के समय पूजा के दौरान पूजा की धुन बजी गई।,0,0,0,0,0,0,0
+cultural,Gemma-2-2B (LoRA),The temple bell rang at sunrise.,प्रातःकालीन सूर्योदय के समय मंदिर का घंटा बजता था।,0,0,0,0,0,0,0
+cultural,Llama-3.2-1B (3-shot prompt),The temple bell rang at sunrise.,मूसा (ग़रज़) तो रात ही को चले गए,0,0,0,0,0,0,0
+cultural,Gemma-2-2B (3-shot prompt),The temple bell rang at sunrise.,रात ही घंटा बज गया,0,0,0,0,0,0,0
+cultural,Transformer (scratch),They signed the prenuptial agreement before the ceremony.,वे सिर्फ से पहले से पहले से पहले से पहले सीना से पहले से पहले से पहले सीमाद.,0,0,0,1,0,0,0
+cultural,mT5-small (fine-tuned),They signed the prenuptial agreement before the ceremony.,वे शनिवार के लिए हस्ताक्षर हस्ताक्षर किया गया.,0,0,0,0,0,0,0
+cultural,Llama-3.2-1B (LoRA),They signed the prenuptial agreement before the ceremony.,वे पूर्व निपटान समझौते को पूर्व से हस्ताक्षर किया.,0,0,0,0,0,0,0
+cultural,Gemma-2-2B (LoRA),They signed the prenuptial agreement before the ceremony.,वे शादी से पहले प्री-नुप्तीय समझौता हस्ताक्षर किया.,0,0,0,0,0,0,0
+cultural,Llama-3.2-1B (3-shot prompt),They signed the prenuptial agreement before the ceremony.,मूसा (मुस्तफा) ने प्रेम संधान से पहले विवाह के लिए प्रेमियों को स्वीकार करने का निर्णय लिया,0,0,0,0,0,0,0
+cultural,Gemma-2-2B (3-shot prompt),They signed the prenuptial agreement before the ceremony.,वह शादी से पहले अनुबंध पर हस्ताक्षर कर चुके थे,0,0,0,0,0,0,0
+cultural,Transformer (scratch),We celebrated Christmas with the whole family.,हमने किसी को निर्देशिकार के साथ विश्वार किया।,0,0,0,0,0,0,0
+cultural,mT5-small (fine-tuned),We celebrated Christmas with the whole family.,हमने पूरी क़ौम के साथ रात को याद किया।,0,0,0,0,0,0,0
+cultural,Llama-3.2-1B (LoRA),We celebrated Christmas with the whole family.,हम पूरे घर के साथ च्रिस्मस मनाया.,0,0,0,0,0,0,0
+cultural,Gemma-2-2B (LoRA),We celebrated Christmas with the whole family.,हम पूरे परिवार के साथ क्रिसमस मनाया.,0,0,0,0,0,0,0
+cultural,Llama-3.2-1B (3-shot prompt),We celebrated Christmas with the whole family.,"ञाना की प्रतिष्ठा के प्रति होने वाली बात के लिए यह कहना कि वह किसी को अपना बेटा बनाए, यह बहुत ही अस्वीकार्य है।",0,0,0,0,0,0,0
+cultural,Gemma-2-2B (3-shot prompt),We celebrated Christmas with the whole family.,हमने परिवार के साथ क्रिसमस का जश्न मनाया।,0,0,0,0,0,0,0
+fidelity,Transformer (scratch),Dr. Rao met Mr. Fernandes in Lisbon on 14 March 1998.,विफ्टोरी में ट्रीनी में ट्रैक पर.,0,0,1,0,0,0,0
+fidelity,mT5-small (fine-tuned),Dr. Rao met Mr. Fernandes in Lisbon on 14 March 1998.,डॉ. रानो ने 13 फरवरी 1997 में श्री रॉरो के साथ डॉक्टर रॉरो के साथ किया.,0,0,1,0,0,0,0
+fidelity,Llama-3.2-1B (LoRA),Dr. Rao met Mr. Fernandes in Lisbon on 14 March 1998.,डॉ. राव ने 14 मार्च 1998 को लिसबन में मेजर फेरनेड्स के साथ मुलाकात की।,0,0,0,0,0,0,0
+fidelity,Gemma-2-2B (LoRA),Dr. Rao met Mr. Fernandes in Lisbon on 14 March 1998.,डॉ. रॉ 14 मार्च 1998 को लिसबन में श्री फर्नांडीज से मुलाकात की.,0,0,0,0,0,0,0
+fidelity,Llama-3.2-1B (3-shot prompt),Dr. Rao met Mr. Fernandes in Lisbon on 14 March 1998.,Dr. रावा ने 14 मार्च 1998 को लिसबन में मिश्रित राष्ट्रीय संघ के साथ मुलाकात की।,0,0,0,0,0,0,0
+fidelity,Gemma-2-2B (3-shot prompt),Dr. Rao met Mr. Fernandes in Lisbon on 14 March 1998.,14 मार्च 1998 को लिसबन में डॉ. राव ने फर्नांड्स से मुलाकात की।,0,0,0,0,0,0,0
+fidelity,Transformer (scratch),Only 3 of the 17 samples passed the test.,"सिर्फ़ी सुनाओ, सुनाफ़ के साथ.",0,0,1,0,0,0,0
+fidelity,mT5-small (fine-tuned),Only 3 of the 17 samples passed the test.,कुल 17 परीक्षा के लिए 3 परीक्षा किया गया.,0,0,0,0,0,0,0
+fidelity,Llama-3.2-1B (LoRA),Only 3 of the 17 samples passed the test.,सिर्फ 3 से 17 परीक्षण के परिणाम में है.,0,0,0,0,0,0,0
+fidelity,Gemma-2-2B (LoRA),Only 3 of the 17 samples passed the test.,सिर्फ 17 नमूनों में से 3 ही परीक्षा में पास हुए.,0,0,0,0,0,0,0
+fidelity,Llama-3.2-1B (3-shot prompt),Only 3 of the 17 samples passed the test.,3,0,0,1,0,0,0,0
+fidelity,Gemma-2-2B (3-shot prompt),Only 3 of the 17 samples passed the test.,तीन ही परीक्षण में सफल हुए।,0,0,1,0,0,0,0
+fidelity,Transformer (scratch),The flight leaves at 7:45 from gate 23.,लॉग को ब्राउज़र से बार से बिल्कुल.,0,0,1,0,0,0,0
+fidelity,mT5-small (fine-tuned),The flight leaves at 7:45 from gate 23.,यह यात्रा 23. तक के लिए 7:45 से 7:45 से लौट जाता है,0,0,1,0,0,0,0
+fidelity,Llama-3.2-1B (LoRA),The flight leaves at 7:45 from gate 23.,विमान 23 से 7: 45 से उड़ान भरेगा.,0,0,0,0,0,0,0
+fidelity,Gemma-2-2B (LoRA),The flight leaves at 7:45 from gate 23.,उड़ान 7: 45 से द्वार 23 से निकलती है.,0,0,0,0,0,0,0
+fidelity,Llama-3.2-1B (3-shot prompt),The flight leaves at 7:45 from gate 23.,ग़रज़ (मूसा) तो रात ही को चले गए,0,0,1,0,0,0,0
+fidelity,Gemma-2-2B (3-shot prompt),The flight leaves at 7:45 from gate 23.,गेट नंबर 23 से शाम 7:45 बजे उड़ान चलती है।,0,0,0,0,0,0,0
+fidelity,Transformer (scratch),"The invoice total is 4,250 rupees including tax.",बहुत सुलान के लिए बहुत से हुआ.,0,0,1,0,0,0,0
+fidelity,mT5-small (fine-tuned),"The invoice total is 4,250 rupees including tax.","यह स्वीकार कुल 42,500 रुपये है.",0,0,1,0,0,0,0
+fidelity,Llama-3.2-1B (LoRA),"The invoice total is 4,250 rupees including tax.","आवश्यक कर के अलावा 4,250 रुपये का व्यापारिक खाता है.",0,0,0,0,0,0,0
+fidelity,Gemma-2-2B (LoRA),"The invoice total is 4,250 rupees including tax.","आवैज कुल 4,250 रुपये है जिसमें कर शामिल है.",0,0,0,0,0,0,0
+fidelity,Llama-3.2-1B (3-shot prompt),"The invoice total is 4,250 rupees including tax.",ञ्जान की प्रतिष्ठा के प्रतिकूल है कि वह किसी को अपना बेटा बनाए,0,0,1,0,0,0,0
+fidelity,Gemma-2-2B (3-shot prompt),"The invoice total is 4,250 rupees including tax.",4250 रुपये के कुल मूल्य में कर शामिल है,0,0,1,0,0,0,0
+gender,Transformer (scratch),The chief executive signed the agreement.,मीरीटरी नीचियूटरी सीडी मिल्टर.,0,0,0,0,0,0,0
+gender,mT5-small (fine-tuned),The chief executive signed the agreement.,मुख्य सचिव ने हस्ताक्षर किया.,0,0,0,0,0,0,0
+gender,Llama-3.2-1B (LoRA),The chief executive signed the agreement.,चीफ एक्सेक्यूटिव ने समझौते का हस्ताक्षर किया.,0,0,0,0,0,0,0
+gender,Gemma-2-2B (LoRA),The chief executive signed the agreement.,मुख्य कार्यकारी ने समझौता हस्ताक्षर किया.,0,0,0,0,0,0,0
+gender,Llama-3.2-1B (3-shot prompt),The chief executive signed the agreement.,मूसा (ग़रज़) ने समझौते को हस्ताक्षर किया।,0,0,0,0,0,0,0
+gender,Gemma-2-2B (3-shot prompt),The chief executive signed the agreement.,मुख्य कार्यकारी ने समझौते पर हस्ताक्षर किया।,0,0,0,0,0,0,0
+gender,Transformer (scratch),The cleaner signed the agreement.,डेलॉक्सी नियमित निर्माल.,0,0,0,0,0,0,0
+gender,mT5-small (fine-tuned),The cleaner signed the agreement.,cleaner ने हस्ताक्षर किया.,0,0,0,0,0,0,0
+gender,Llama-3.2-1B (LoRA),The cleaner signed the agreement.,साफ करने वाला ने समझौते का हस्ताक्षर किया.,0,0,0,0,0,0,0
+gender,Gemma-2-2B (LoRA),The cleaner signed the agreement.,सफाईकर्ता ने समझौता हस्ताक्षर किया.,0,0,0,0,0,0,0
+gender,Llama-3.2-1B (3-shot prompt),The cleaner signed the agreement.,ञ्जान की प्रतिष्ठा के प्रतिकूल है कि वह किसी को अपना बेटा बनाए,0,0,0,0,0,0,0
+gender,Gemma-2-2B (3-shot prompt),The cleaner signed the agreement.,सफाईकर्ता ने समझौते पर हस्ताक्षर किया।,0,0,0,0,0,0,0
+gender,Transformer (scratch),The doctor finished the report and went home.,डिट्रॉट को मिटाडा और बिल्ड को बाहर.,0,0,0,0,0,0,0
+gender,mT5-small (fine-tuned),The doctor finished the report and went home.,डॉक्टर ने यह रिपोर्ट किया और घर जाने के लिए घर किया.,0,0,0,0,0,0,0
+gender,Llama-3.2-1B (LoRA),The doctor finished the report and went home.,दॉक्टर ने रिपोर्ट पूरी की और घर वापस चले गए।,0,0,0,0,0,0,0
+gender,Gemma-2-2B (LoRA),The doctor finished the report and went home.,डॉक्टर रिपोर्ट समाप्त कर दिया और घर गया.,0,0,0,0,0,0,0
+gender,Llama-3.2-1B (3-shot prompt),The doctor finished the report and went home.,ञाना ने अपने पिता को अपना बेटा बनाने के लिए कोई अन्य विकल्प नहीं चुनने के लिए कोई अन्य विकल्प नहीं चुनने के लिए कोई अन्य विकल्प नहीं चुनने के लिए कोई अन्य,0,0,0,1,1,0,0
+gender,Gemma-2-2B (3-shot prompt),The doctor finished the report and went home.,डॉक्टर ने रिपोर्ट लिखी और घर चला गया।,0,0,0,0,0,0,0
+gender,Transformer (scratch),The engineer explained the problem to the team.,एक्लॉन्फ़िगर के लिए एक टीमाइल के लिए.,0,0,0,0,0,0,0
+gender,mT5-small (fine-tuned),The engineer explained the problem to the team.,कम्प्यूटर ने सिस्टम को समस्या किया.,0,0,0,0,0,0,0
+gender,Llama-3.2-1B (LoRA),The engineer explained the problem to the team.,इंजीनियर ने टीम को समस्या का विवरण दिया.,0,0,0,0,0,0,0
+gender,Gemma-2-2B (LoRA),The engineer explained the problem to the team.,इंजीनियर टीम को समस्या का स्पष्टीकरण कराया.,0,0,0,0,0,0,0
+gender,Llama-3.2-1B (3-shot prompt),The engineer explained the problem to the team.,ग़रज़ (मूसा) तो रात ही को चले गए,0,0,0,0,0,0,0
+gender,Gemma-2-2B (3-shot prompt),The engineer explained the problem to the team.,इंजीनियर टीम को समस्या का वर्णन कराया,0,0,0,0,0,0,0
+gender,Transformer (scratch),The nurse finished the report and went home.,कोई ट्रैग और रिपोर्ट कार्ड.,0,0,0,0,0,0,0
+gender,mT5-small (fine-tuned),The nurse finished the report and went home.,डॉक्टर ने यह रिपोर्ट किया और घर जा रहा था.,0,0,0,0,0,0,0
+gender,Llama-3.2-1B (LoRA),The nurse finished the report and went home.,नurses ने रिपोर्ट पूरा किया और घर वापस चले गए.,0,0,0,0,0,0,0
+gender,Gemma-2-2B (LoRA),The nurse finished the report and went home.,नार्स ने रिपोर्ट समाप्त कर दी और घर जाकर बैठ गई।,0,0,0,0,0,0,0
+gender,Llama-3.2-1B (3-shot prompt),The nurse finished the report and went home.,ञान की प्रतिष्ठा के प्रतिकूल है कि वह किसी को अपना बेटा बनाए,0,0,0,0,0,0,0
+gender,Gemma-2-2B (3-shot prompt),The nurse finished the report and went home.,आज्ञाकारिता ने रात को घर वापस आने का फैसला किया,0,0,0,0,0,0,0
+gender,Transformer (scratch),The nurse said that he was tired after the operation.,लेकिन वह बहुत से बात से कहा था.,0,0,0,0,0,0,0
+gender,mT5-small (fine-tuned),The nurse said that he was tired after the operation.,डॉक्टर ने कहा कि वह ठीक था.,0,0,0,0,0,0,0
+gender,Llama-3.2-1B (LoRA),The nurse said that he was tired after the operation.,नurses ने कहा कि वह ऑपरेशन के बाद थका हुआ था।,0,0,0,0,0,0,0
+gender,Gemma-2-2B (LoRA),The nurse said that he was tired after the operation.,नार्स ने कहा कि वह ऑपरेशन के बाद थक गया था.,0,0,0,0,0,0,0
+gender,Llama-3.2-1B (3-shot prompt),The nurse said that he was tired after the operation.,"ञ्जाना की प्रतिष्ठा के प्रति यह कहना कि वह किसी को अपना बेटा बनाए, किसी को अपना बेटा बनाना क्रूर है, और उन्हें अपने जीवन के साथ छोड़ देना क्रूर है।",0,0,0,0,0,0,0
+gender,Gemma-2-2B (3-shot prompt),The nurse said that he was tired after the operation.,चिकित्सक ने बताया कि उसे ऑपरेशन के बाद थका हुआ है।,0,0,0,0,0,0,0
+gender,Transformer (scratch),The receptionist published the results last year.,प्रेषक डिस्क्रिप्टि से प्रारंभ प्रारंभ करें.,0,0,0,0,0,0,0
+gender,mT5-small (fine-tuned),The receptionist published the results last year.,प्राप्तकर्ता ने यह प्राप्त कर दिया.,0,0,0,0,0,0,0
+gender,Llama-3.2-1B (LoRA),The receptionist published the results last year.,पिछले वर्ष के अंत में प्राप्ति सूची प्रकाशित की गई थी।,0,0,0,0,0,0,0
+gender,Gemma-2-2B (LoRA),The receptionist published the results last year.,पहले साल रिजल्ट्स प्रकाशित कर दिए गए थे।,0,0,0,0,0,0,0
+gender,Llama-3.2-1B (3-shot prompt),The receptionist published the results last year.,ञ्जान की प्रतिष्ठा के प्रतिकूल है कि वह किसी को अपना बेटा बनाए,0,0,0,0,0,0,0
+gender,Gemma-2-2B (3-shot prompt),The receptionist published the results last year.,पिछले साल रिसेप्शनिस्ट ने परिणाम प्रकाशित किए।,0,0,0,0,0,0,0
+gender,Transformer (scratch),The scientist published the results last year.,प्रैक्सिक्स प्रारंभित की प्रारंभित.,0,0,0,0,0,0,0
+gender,mT5-small (fine-tuned),The scientist published the results last year.,विज्ञान ने पहले वर्ष तक प्राप्त कर दिया.,0,0,0,0,0,0,0
+gender,Llama-3.2-1B (LoRA),The scientist published the results last year.,वैज्ञानिक के प्रयोग के परिणाम हाल ही में प्रकाशित हुए थे.,0,0,0,0,0,0,0
+gender,Gemma-2-2B (LoRA),The scientist published the results last year.,वैज्ञानिक ने पिछले साल परिणाम प्रकाशित किया.,0,0,0,0,0,0,0
+gender,Llama-3.2-1B (3-shot prompt),The scientist published the results last year.,ञ्जाना की प्रतिष्ठा के प्रतिकूल है कि वह किसी को अपना बेटा बनाए,0,0,0,0,0,0,0
+gender,Gemma-2-2B (3-shot prompt),The scientist published the results last year.,वर्ष पहले वैज्ञानिक परिणाम प्रकाशित कर दिए।,0,0,0,0,0,0,0
+gender,Transformer (scratch),The surgeon said that she was tired after the operation.,बेहतर लेबले बात कहा था.,0,0,0,0,0,0,0
+gender,mT5-small (fine-tuned),The surgeon said that she was tired after the operation.,डॉलर ने कहा कि वह ठीक था.,0,0,0,0,0,0,0
+gender,Llama-3.2-1B (LoRA),The surgeon said that she was tired after the operation.,सurgन ने कहा कि वह ऑपरेशन के बाद थकी थी।,0,0,0,0,0,0,0
+gender,Gemma-2-2B (LoRA),The surgeon said that she was tired after the operation.,सर्जनों ने कहा कि वह ऑपरेशन के बाद थक गई थी।,0,0,0,0,0,0,0
+gender,Llama-3.2-1B (3-shot prompt),The surgeon said that she was tired after the operation.,"मूसा (ग़रज़) ने कहा, ""मैं तो रात ही चला गया""",0,0,0,0,0,0,0
+gender,Gemma-2-2B (3-shot prompt),The surgeon said that she was tired after the operation.,उस सर्जन ने कहा कि वह ऑपरेशन के बाद थकी हुई थी।,0,0,0,0,0,0,0
+gender,Transformer (scratch),The teacher explained the problem to the class.,किसी नेकी की तरह से एक चिट्ठा को छोड़ा दिया,0,0,0,0,0,0,0
+gender,mT5-small (fine-tuned),The teacher explained the problem to the class.,विद्यालय के लिए विषय के लिए बात थी.,0,0,0,0,0,0,0
+gender,Llama-3.2-1B (LoRA),The teacher explained the problem to the class.,शिक्षक ने समस्या को स्टूडेंट्स को समझाया.,0,0,0,0,0,0,0
+gender,Gemma-2-2B (LoRA),The teacher explained the problem to the class.,शिक्षक ने कक्षा में समस्या को समझाया.,0,0,0,0,0,0,0
+gender,Llama-3.2-1B (3-shot prompt),The teacher explained the problem to the class.,ग़रज़ (मूसा) तो रात ही को चले गए,0,0,0,0,0,0,0
+gender,Gemma-2-2B (3-shot prompt),The teacher explained the problem to the class.,शिक्षक ने कक्षा को समस्या का वर्णन किया।,0,0,0,0,0,0,0
+sensitive,Transformer (scratch),"If you feel unwell after the injection, contact the clinic immediately.","अगर आप कुछ संपर्क में बहुत से बंद कर रहे हैं, आप संपर्क के बाद में हैं.",0,0,0,0,0,0,0
+sensitive,mT5-small (fine-tuned),"If you feel unwell after the injection, contact the clinic immediately.","यदि आप चिकित्सक के बाद न हो, संपर्क के बाद संपर्क करो.",0,0,0,0,0,0,0
+sensitive,Llama-3.2-1B (LoRA),"If you feel unwell after the injection, contact the clinic immediately.",यदि आप को कुछ बीमारी हो जाती है तो तुरंत क्लिनिक से संपर्क करें.,0,0,0,0,0,0,0
+sensitive,Gemma-2-2B (LoRA),"If you feel unwell after the injection, contact the clinic immediately.","अगर आप इंजेक्शन के बाद बीमार महसूस करें, तुरंत क्लिनिक में संपर्क करें.",0,0,0,0,0,0,0
+sensitive,Llama-3.2-1B (3-shot prompt),"If you feel unwell after the injection, contact the clinic immediately.",ञान की प्रतिष्ठा के प्रतिकूल है कि वह किसी को अपना बेटा बनाए,0,0,0,0,0,0,0
+sensitive,Gemma-2-2B (3-shot prompt),"If you feel unwell after the injection, contact the clinic immediately.",अगर आपको इंजेक्शन के बाद बुखार हो तो तुरंत क्लिनिक कॉल करें।,0,0,0,0,0,0,0
+sensitive,Transformer (scratch),"Take two tablets every six hours, and do not exceed eight tablets a day.",दो सार्भाषी के साथ दोहराओं के लिए एक संभावना को दिन नहीं है.,0,0,0,0,0,0,0
+sensitive,mT5-small (fine-tuned),"Take two tablets every six hours, and do not exceed eight tablets a day.","तीन मिनट के लिए दो tablets ले जाओ, और एक दिन तक एक सप्ताह के लिए एक सप्ताह.",0,0,0,0,0,0,0
+sensitive,Llama-3.2-1B (LoRA),"Take two tablets every six hours, and do not exceed eight tablets a day.",एक घंटे में दो टैबलेट लें और एक दिन में आठ टैबलेट तक न लें.,0,0,0,0,0,0,0
+sensitive,Gemma-2-2B (LoRA),"Take two tablets every six hours, and do not exceed eight tablets a day.",दिन में आठ टैबलेट न खाओ और हर छह घंटे में दो टैबलेट खाओ,0,0,0,0,0,0,0
+sensitive,Llama-3.2-1B (3-shot prompt),"Take two tablets every six hours, and do not exceed eight tablets a day.",ऑक्सिटोसिन (ओक्सीटोसिन) की खुराक लेने के लिए दो टेबलेट्स हर छह घंटे में लें और दिन में सीमित 8 टेबलेट्स लें।,0,0,1,0,0,0,0
+sensitive,Gemma-2-2B (3-shot prompt),"Take two tablets every six hours, and do not exceed eight tablets a day.",दिन में आठ टैबलेट्स का सेवन न करें और हर छह घंटों में दो टैबलेट्स लें।,0,0,0,0,0,0,0
+sensitive,Transformer (scratch),The contract may be terminated without notice if payment is late.,शायद के साथ शिर्फ संभारिक के लिए समय है.,0,0,0,0,0,0,0
+sensitive,mT5-small (fine-tuned),The contract may be terminated without notice if payment is late.,यह हस्ताक्षर नष्ट होगा यदि जमा लंबे होगा.,0,0,0,0,0,0,0
+sensitive,Llama-3.2-1B (LoRA),The contract may be terminated without notice if payment is late.,कॉन्ट्रैक्ट को बिना सूचना के समाप्त किया जा सकता है यदि भुगतान समय पर नहीं हुआ है.,0,0,0,0,0,0,0
+sensitive,Gemma-2-2B (LoRA),The contract may be terminated without notice if payment is late.,अनुबंध बिना सूचना के समाप्त हो सकता है यदि भुगतान देरी से हो।,0,0,0,0,0,0,0
+sensitive,Llama-3.2-1B (3-shot prompt),The contract may be terminated without notice if payment is late.,ञ्जान की प्रतिष्ठा के प्रतिकूल है कि वह किसी को अपना बेटा बनाए,0,0,0,0,0,0,0
+sensitive,Gemma-2-2B (3-shot prompt),The contract may be terminated without notice if payment is late.,यदि भुगतान देर हो तो अनुबंध बिना किसी सूचना के समाप्त हो सकता है।,0,0,0,0,0,0,0
+sensitive,Transformer (scratch),The patient is allergic to penicillin and must not receive it.,प्रोग्रामीटर के लिए सभी से प्रोग्राम नहीं है.,0,0,0,0,0,0,0
+sensitive,mT5-small (fine-tuned),The patient is allergic to penicillin and must not receive it.,चिकित्सक डायब्यूशन के लिए चिकित्सक चिकित्सक चिकित्सक चिकित्सक चिकित्सक है और इसे नहीं मिलना चाहिए.,0,0,0,1,0,0,0
+sensitive,Llama-3.2-1B (LoRA),The patient is allergic to penicillin and must not receive it.,पेनिसिलिन के लिए संवेदनशील है और इसे प्राप्त नहीं करना चाहिए.,0,0,0,0,0,0,0
+sensitive,Gemma-2-2B (LoRA),The patient is allergic to penicillin and must not receive it.,पेशेंट पेनिसिलिन के लिए एलर्जी है और इसे नहीं मिलना चाहिए.,0,0,0,0,0,0,0
+sensitive,Llama-3.2-1B (3-shot prompt),The patient is allergic to penicillin and must not receive it.,मूसा (ग़रज़) को रात ही चले गए,0,0,0,0,0,0,0
+sensitive,Gemma-2-2B (3-shot prompt),The patient is allergic to penicillin and must not receive it.,पेनिसिलिन से एलर्जी है और उसे नहीं देना चाहिए।,0,0,0,0,0,0,0

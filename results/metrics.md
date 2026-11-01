@@ -1,0 +1,8 @@
+| Model | Architecture | Adaptation | Params (M) | Trained params (M) | BLEU | chrF++ | Train time (s) | Inference (s) | ms / sentence |
+|---|---|---|---|---|---|---|---|---|---|
+| Transformer (scratch) | encoder-decoder | trained from scratch | 9.64 | 9.643 | 5.48 | 18.34 | 660.6 | 9.8 | 19.6 |
+| mT5-small (fine-tuned) | encoder-decoder | full fine-tuning | 300.18 | 300.177 | 9.22 | 21.66 | 1781.7 | 30.7 | 61.4 |
+| Llama-3.2-1B (LoRA) | decoder-only | LoRA r=16 | 1235.81 | 11.272 | 14.96 | 32.33 | 7775.7 | 239.1 | 478.1 |
+| Gemma-2-2B (LoRA) | decoder-only | LoRA r=16 | 2614.34 | 20.767 | 20.31 | 38.4 | 15591.1 | 360.1 | 720.2 |
+| Llama-3.2-1B (3-shot prompt) | decoder-only | 3-shot prompting (no weight update) | 1235.81 | 0.0 | 0.72 | 8.39 | 0.0 | 370.5 | 741.0 |
+| Gemma-2-2B (3-shot prompt) | decoder-only | 3-shot prompting (no weight update) | 2614.34 | 0.0 | 8.55 | 25.73 | 0.0 | 450.4 | 900.9 |

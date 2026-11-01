@@ -1,0 +1,21 @@
+model,architecture,temperature,decoding,bleu,chrf,empty_outputs,mean_output_chars,distinct_output_ratio,inference_time_s,sentences
+Transformer (scratch),encoder-decoder,0.0,greedy,5.79,18.93,1,37.0,1.0,3.1,150
+Transformer (scratch),encoder-decoder,0.3,sampling,5.15,18.63,1,36.1,1.0,3.1,150
+Transformer (scratch),encoder-decoder,0.6,sampling,3.21,17.55,1,37.0,0.993,2.9,150
+Transformer (scratch),encoder-decoder,0.9,sampling,2.84,14.52,1,40.7,1.0,3.0,150
+Transformer (scratch),encoder-decoder,1.2,sampling,0.53,6.65,0,64.5,1.0,2.9,150
+mT5-small (fine-tuned),encoder-decoder,0.0,greedy,7.32,21.67,0,40.6,1.0,10.1,150
+mT5-small (fine-tuned),encoder-decoder,0.3,sampling,7.59,22.16,0,38.1,1.0,8.9,150
+mT5-small (fine-tuned),encoder-decoder,0.6,sampling,6.46,20.84,0,39.4,1.0,9.0,150
+mT5-small (fine-tuned),encoder-decoder,0.9,sampling,4.65,18.24,0,41.6,1.0,8.8,150
+mT5-small (fine-tuned),encoder-decoder,1.2,sampling,2.98,14.97,0,46.6,1.0,10.2,150
+Llama-3.2-1B (LoRA),decoder-only,0.0,greedy,14.81,32.91,0,41.5,1.0,74.4,150
+Llama-3.2-1B (LoRA),decoder-only,0.3,sampling,14.14,32.75,0,42.2,1.0,74.4,150
+Llama-3.2-1B (LoRA),decoder-only,0.6,sampling,11.99,29.06,0,41.3,1.0,72.6,150
+Llama-3.2-1B (LoRA),decoder-only,0.9,sampling,5.81,20.6,0,41.2,1.0,73.7,150
+Llama-3.2-1B (LoRA),decoder-only,1.2,sampling,1.03,7.06,0,118.9,1.0,92.3,150
+Gemma-2-2B (LoRA),decoder-only,0.0,greedy,20.96,39.82,0,40.9,0.993,111.3,150
+Gemma-2-2B (LoRA),decoder-only,0.3,sampling,18.64,38.63,0,40.4,1.0,111.1,150
+Gemma-2-2B (LoRA),decoder-only,0.6,sampling,15.3,33.6,0,40.2,1.0,111.5,150
+Gemma-2-2B (LoRA),decoder-only,0.9,sampling,8.29,25.0,0,41.8,1.0,126.8,150
+Gemma-2-2B (LoRA),decoder-only,1.2,sampling,4.06,15.81,0,47.5,1.0,119.0,150

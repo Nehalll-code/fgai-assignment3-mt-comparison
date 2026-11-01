@@ -110,8 +110,11 @@ test set is committed as
 below can be reproduced sentence for sentence.
 
 <!-- BEGIN:dataset_stats -->
-> **Not populated yet.** Run the pipeline (`python -m src.run_all`, or the
-> notebook on a GPU runtime) and then `python scripts/update_readme.py`.
+| Split | Pairs | Mean EN words | Mean HI words | Mean EN chars | Mean HI chars | EN word types | HI word types |
+|---|---|---|---|---|---|---|---|
+| train | 20000 | 8.8 | 10.2 | 47.7 | 49.3 | 24243 | 22264 |
+| val | 1000 | 8.6 | 9.8 | 46.0 | 47.0 | 3127 | 3313 |
+| test | 500 | 7.6 | 8.8 | 41.2 | 41.7 | 1688 | 1840 |
 <!-- END:dataset_stats -->
 
 ---
@@ -209,8 +212,14 @@ soft-capping is ignored by the fused attention kernels.
 | One model in memory | each system is released before the next loads |
 
 <!-- BEGIN:checkpoints -->
-> **Not populated yet.** Run the pipeline (`python -m src.run_all`, or the
-> notebook on a GPU runtime) and then `python scripts/update_readme.py`.
+| System | Checkpoint actually loaded | Adaptation | Note |
+|---|---|---|---|
+| Transformer (scratch) | `custom 3+3 layers, d_model=256, joint BPE 16000` | trained from scratch |  |
+| mT5-small (fine-tuned) | `google/mt5-small` | full fine-tuning |  |
+| Llama-3.2-1B (LoRA) | `unsloth/Llama-3.2-1B-Instruct` | LoRA r=16 |  |
+| Gemma-2-2B (LoRA) | `unsloth/gemma-2-2b-it` | LoRA r=16 |  |
+| Llama-3.2-1B (3-shot prompt) | `unsloth/Llama-3.2-1B-Instruct` | 3-shot prompting (no weight update) |  |
+| Gemma-2-2B (3-shot prompt) | `unsloth/gemma-2-2b-it` | 3-shot prompting (no weight update) |  |
 <!-- END:checkpoints -->
 
 ---
@@ -382,13 +391,20 @@ results/
 ## 5. Results obtained
 
 <!-- BEGIN:run_banner -->
-> **Not populated yet.** Run the pipeline (`python -m src.run_all`, or the
-> notebook on a GPU runtime) and then `python scripts/update_readme.py`.
+Run completed 2026-11-01T01:25:48+00:00 on **Tesla T4** (bfloat16), profile `full`, 7.6 h of measured training and inference across the six systems.
+Splits: test=500, val=1000, train=20000. Test-set mean length: 7.6 English words / 8.8 Hindi words.
+Metric signatures: `nrefs:1|case:mixed|eff:no|tok:intl|smooth:exp|version:2.6.0` and `nrefs:1|case:mixed|eff:yes|nc:6|nw:2|space:no|version:2.6.0`.
 <!-- END:run_banner -->
 
 <!-- BEGIN:results_table -->
-> **Not populated yet.** Run the pipeline (`python -m src.run_all`, or the
-> notebook on a GPU runtime) and then `python scripts/update_readme.py`.
+| Model | Architecture | Adaptation | Params (M) | Params trained (M) | BLEU | chrF++ | Train time (s) | Inference, full test set (s) | ms / sentence |
+|---|---|---|---|---|---|---|---|---|---|
+| Transformer (scratch) | encoder-decoder | trained from scratch | 9.64 | 9.643 | 5.48 | 18.34 | 660.6 | 9.8 | 19.6 |
+| mT5-small (fine-tuned) | encoder-decoder | full fine-tuning | 300.18 | 300.177 | 9.22 | 21.66 | 1781.7 | 30.7 | 61.4 |
+| Llama-3.2-1B (LoRA) | decoder-only | LoRA r=16 | 1235.81 | 11.272 | 14.96 | 32.33 | 7775.7 | 239.1 | 478.1 |
+| Gemma-2-2B (LoRA) | decoder-only | LoRA r=16 | 2614.34 | 20.767 | 20.31 | 38.4 | 15591.1 | 360.1 | 720.2 |
+| Llama-3.2-1B (3-shot prompt) | decoder-only | 3-shot prompting (no weight update) | 1235.81 | 0.0 | 0.72 | 8.39 | 0.0 | 370.5 | 741.0 |
+| Gemma-2-2B (3-shot prompt) | decoder-only | 3-shot prompting (no weight update) | 2614.34 | 0.0 | 8.55 | 25.73 | 0.0 | 450.4 | 900.9 |
 <!-- END:results_table -->
 
 ![Translation quality](results/plots/quality_bleu_chrf.png)
@@ -398,6 +414,14 @@ results/
 ![Quality against model size](results/plots/quality_vs_size.png)
 
 ![Training and validation loss](results/plots/loss_curves.png)
+
+The two LoRA panels show a single point rather than a curve: both decoder-only
+models are trained for one epoch, so there is exactly one train/validation
+measurement each. The scratch Transformer (20 epochs) is the only system here
+that trains long enough to show the shape that matters — its validation loss
+flattens around epoch 10 while training loss keeps falling, which is the
+overfitting this data size makes unavoidable and the reason its BLEU is the
+lowest of the four trained systems.
 
 Side-by-side outputs for the same inputs are in
 [`results/sample_translations.md`](results/sample_translations.md), and every
@@ -489,8 +513,14 @@ hallucinated additions), refusal or meta-commentary leaking out of an
 instruction-tuned model, and verbatim source copying.
 
 <!-- BEGIN:error_table -->
-> **Not populated yet.** Run the pipeline (`python -m src.run_all`, or the
-> notebook on a GPU runtime) and then `python scripts/update_readme.py`.
+| System | n | Empty % | Latin-script leak % | Number mismatch % | Degenerate repetition % | Over-long output % | Refusal / meta % | Source copied % |
+|---|---|---|---|---|---|---|---|---|
+| gemma_2_2b_3_shot_prompt | 500 | 1.8 | 6.2 | 1.2 | 0.4 | 0.4 | 0.0 | 3.2 |
+| gemma_2_2b_lora | 500 | 0.0 | 2.4 | 0.6 | 0.4 | 0.0 | 0.0 | 0.0 |
+| llama_3_2_1b_3_shot_prompt | 500 | 0.0 | 17.6 | 4.4 | 0.2 | 21.2 | 0.0 | 2.0 |
+| llama_3_2_1b_lora | 500 | 0.0 | 2.2 | 0.8 | 1.2 | 0.4 | 0.0 | 0.0 |
+| mt5_small_fine_tuned | 500 | 0.0 | 4.8 | 0.8 | 7.0 | 0.2 | 0.0 | 0.2 |
+| transformer_scratch | 500 | 0.2 | 0.0 | 4.4 | 1.6 | 0.0 | 0.0 | 0.0 |
 <!-- END:error_table -->
 
 Concrete instances of each flag, plus the three worst-scoring sentences per
@@ -516,15 +546,37 @@ the ratio of distinct outputs (a direct diversity measure).
 ![Temperature sweep](results/plots/temperature_sweep.png)
 
 <!-- BEGIN:temperature_summary -->
-> **Not populated yet.** Run the pipeline (`python -m src.run_all`, or the
-> notebook on a GPU runtime) and then `python scripts/update_readme.py`.
+- **Transformer (scratch)** - greedy chrF++ 18.93; best sampled setting T=0.3 (chrF++ 18.63, still below greedy); at T=1.2 chrF++ falls to 6.65, a 65% relative loss.
+- **mT5-small (fine-tuned)** - greedy chrF++ 21.67; best sampled setting T=0.3 (chrF++ 22.16, above greedy); at T=1.2 chrF++ falls to 14.97, a 31% relative loss.
+- **Llama-3.2-1B (LoRA)** - greedy chrF++ 32.91; best sampled setting T=0.3 (chrF++ 32.75, still below greedy); at T=1.2 chrF++ falls to 7.06, a 79% relative loss.
+- **Gemma-2-2B (LoRA)** - greedy chrF++ 39.82; best sampled setting T=0.3 (chrF++ 38.63, still below greedy); at T=1.2 chrF++ falls to 15.81, a 60% relative loss.
 <!-- END:temperature_summary -->
 
 Full sweep:
 
 <!-- BEGIN:temperature_table -->
-> **Not populated yet.** Run the pipeline (`python -m src.run_all`, or the
-> notebook on a GPU runtime) and then `python scripts/update_readme.py`.
+| Model | Temperature | Decoding | BLEU | chrF++ | Mean chars | Distinct outputs | Empty |
+|---|---|---|---|---|---|---|---|
+| Transformer (scratch) | 0.0 | greedy | 5.79 | 18.93 | 37.0 | 1.0 | 1 |
+| Transformer (scratch) | 0.3 | sampling | 5.15 | 18.63 | 36.1 | 1.0 | 1 |
+| Transformer (scratch) | 0.6 | sampling | 3.21 | 17.55 | 37.0 | 0.993 | 1 |
+| Transformer (scratch) | 0.9 | sampling | 2.84 | 14.52 | 40.7 | 1.0 | 1 |
+| Transformer (scratch) | 1.2 | sampling | 0.53 | 6.65 | 64.5 | 1.0 | 0 |
+| mT5-small (fine-tuned) | 0.0 | greedy | 7.32 | 21.67 | 40.6 | 1.0 | 0 |
+| mT5-small (fine-tuned) | 0.3 | sampling | 7.59 | 22.16 | 38.1 | 1.0 | 0 |
+| mT5-small (fine-tuned) | 0.6 | sampling | 6.46 | 20.84 | 39.4 | 1.0 | 0 |
+| mT5-small (fine-tuned) | 0.9 | sampling | 4.65 | 18.24 | 41.6 | 1.0 | 0 |
+| mT5-small (fine-tuned) | 1.2 | sampling | 2.98 | 14.97 | 46.6 | 1.0 | 0 |
+| Llama-3.2-1B (LoRA) | 0.0 | greedy | 14.81 | 32.91 | 41.5 | 1.0 | 0 |
+| Llama-3.2-1B (LoRA) | 0.3 | sampling | 14.14 | 32.75 | 42.2 | 1.0 | 0 |
+| Llama-3.2-1B (LoRA) | 0.6 | sampling | 11.99 | 29.06 | 41.3 | 1.0 | 0 |
+| Llama-3.2-1B (LoRA) | 0.9 | sampling | 5.81 | 20.6 | 41.2 | 1.0 | 0 |
+| Llama-3.2-1B (LoRA) | 1.2 | sampling | 1.03 | 7.06 | 118.9 | 1.0 | 0 |
+| Gemma-2-2B (LoRA) | 0.0 | greedy | 20.96 | 39.82 | 40.9 | 0.993 | 0 |
+| Gemma-2-2B (LoRA) | 0.3 | sampling | 18.64 | 38.63 | 40.4 | 1.0 | 0 |
+| Gemma-2-2B (LoRA) | 0.6 | sampling | 15.3 | 33.6 | 40.2 | 1.0 | 0 |
+| Gemma-2-2B (LoRA) | 0.9 | sampling | 8.29 | 25.0 | 41.8 | 1.0 | 0 |
+| Gemma-2-2B (LoRA) | 1.2 | sampling | 4.06 | 15.81 | 47.5 | 1.0 | 0 |
 <!-- END:temperature_table -->
 
 ### How to read the curve
@@ -583,8 +635,11 @@ Probe outputs for every system: [`results/responsible_ai_probes.md`](results/res
 ## 9. Conclusion — best-performing model
 
 <!-- BEGIN:best_model -->
-> **Not populated yet.** Run the pipeline (`python -m src.run_all`, or the
-> notebook on a GPU runtime) and then `python scripts/update_readme.py`.
+- **Best overall quality: Gemma-2-2B (LoRA)** - chrF++ 38.4, BLEU 20.31 (decoder-only, LoRA r=16, 2614.34M parameters).
+- Best BLEU: Gemma-2-2B (LoRA) (20.31).
+- Fastest at inference: Transformer (scratch) (19.6 ms/sentence).
+- Cheapest adaptation: Transformer (scratch) (660.6s of training).
+- Best quality per parameter: Transformer (scratch) (1.902 chrF++ per million parameters).
 <!-- END:best_model -->
 
 ### What the study shows
@@ -599,8 +654,11 @@ Probe outputs for every system: [`results/responsible_ai_probes.md`](results/res
 * **Tokenisation is a first-class design decision for non-Latin targets.** A
   vocabulary that fragments Devanagari costs quality and speed simultaneously.
 * **Greedy decoding is the correct default for translation.** The temperature
-  sweep shows quality falling monotonically, and output length — the
-  hallucination proxy — rising, as temperature increases.
+  sweep shows quality falling, and output length — the hallucination proxy —
+  rising, as temperature increases. The fall is monotonic above T=0.3 for all
+  four systems; the only setting that beats greedy anywhere is mT5 at T=0.3
+  (chrF++ 22.16 against 21.67), a margin small enough to be sampling noise and
+  not a reason to abandon greedy.
 * **Good corpus metrics do not mean a safe system.** The error profiling and the
   probe sets surface gendered defaults, dropped numbers and softened sensitive
   content in systems whose BLEU looks respectable.

@@ -54,6 +54,25 @@ def _table(rows: list[dict], cols: list[tuple[str, str]]) -> str:
 # Block builders
 # --------------------------------------------------------------------------- #
 
+def _compute_time(info: dict) -> str:
+    """How long the run took, in whichever terms the run actually recorded.
+
+    The notebook drives one stage per cell, so there is no single wall clock
+    spanning them and it records 0.  The per-stage train and inference timings
+    are measured either way, so sum those instead of reporting a zero.
+    """
+    wall = info.get("wall_clock_s") or 0.0
+    if wall:
+        return f"total wall clock {wall / 60:.1f} min"
+    rows = _read_csv("metrics.csv")
+    measured = sum(float(r.get("train_time_s") or 0)
+                   + float(r.get("inference_time_s") or 0) for r in rows)
+    if not measured:
+        return "run time not recorded"
+    return (f"{measured / 3600:.1f} h of measured training and inference "
+            "across the six systems")
+
+
 def block_run_banner() -> str:
     info = _read_json("run_info.json")
     if not info:
@@ -68,8 +87,8 @@ def block_run_banner() -> str:
     stats = info.get("corpus_stats", {}).get("test", {})
     return (
         f"Run completed {info.get('finished_utc', '?')} on **{device}** "
-        f"({info.get('dtype')}), profile `{info.get('profile')}`, total wall clock "
-        f"{info.get('wall_clock_s', 0) / 60:.1f} min.\n"
+        f"({info.get('dtype')}), profile `{info.get('profile')}`, "
+        f"{_compute_time(info)}.\n"
         f"Splits: "
         + ", ".join(f"{k}={v}" for k, v in info.get("split_sizes", {}).items())
         + f". Test-set mean length: {stats.get('src_mean_words', 0):.1f} English words "

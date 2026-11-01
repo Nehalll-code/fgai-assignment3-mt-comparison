@@ -1,0 +1,85 @@
+system,flag,idx,source_en,reference_hi,hypothesis_hi,sent_chrf
+gemma_2_2b_3_shot_prompt,length_blowup,1,Select all text,सारा पाठ चुनें,वह रहमान की प्रतिष्ठा के प्रतिकूल है कि वह किसी को अपना बेटा बनाए,5.62
+gemma_2_2b_3_shot_prompt,source_copy,25,Korean (_UHC),कोरियाई (_UHC),Korean (_UHC),38.65
+gemma_2_2b_3_shot_prompt,source_copy,36,Yacc/Bison flags:,Yacc /बाइसन फ्लैग्स:,Yacc/Bison flags:,15.07
+gemma_2_2b_3_shot_prompt,latin_leak,42,_Previous,पिछला (_P),English: _Previous,3.66
+gemma_2_2b_3_shot_prompt,latin_leak,48,( Moaning ),(कराह रही),(Moaning),6.34
+gemma_2_2b_3_shot_prompt,source_copy,51,/clear: clear all messages from the current conversation,/clear: मौजूदा वार्तालाप से सभी संदेशों को रिक्त करें,/clear: clear all messages from the current conversation,11.68
+gemma_2_2b_3_shot_prompt,latin_leak,57,Add a new file/directory to the Subversion tree,जोड़ें a नया फ़ाइल निर्देशिका को सबवर्सन ट्री,Subversion के पेड़ में एक नया फ़ाइल/डायरेक्टरी जोड़ें,24.22
+gemma_2_2b_3_shot_prompt,repetition,104,O My bondmen who believe! Indeed My earth is spacious – therefore worship Me alone.,"ऐ मेरे बन्दों, जो ईमान लाए हो! निस्संदेह मेरी धरती विशाल है। अतः तुम मेरी ही बन्दगी करो","तुम मेरा भक्त हो, मेरा विश्वास है, मेरा धर्म है, मेरा घर है, मेरा नाम है।",15.42
+gemma_2_2b_3_shot_prompt,number_mismatch,107,2O million pounds.,2O लाख पाउंड.,20 मिलियन पाउंड,24.54
+gemma_2_2b_3_shot_prompt,number_mismatch,109,"For the third quarter ended September 30, Bombardier's net profit fell to $147 million, or 8 cents per share, from $172 million, or 9 cents per share a year earlier.","30 सितंबर को समाप्त तीसरी तिमाही के लिए, Bombardier के शुद्ध लाभ एक साल पहले $ $147मिलियन, या प्रति शेयर 8 सेंट, $172मिलियन, या प्रति शेयर 9 सेंट तक गिर गया.","30 सितंबर, 2023 के समाप्ति तिथि पर, बॉम्बरडर का शुद्ध लाभ 147 मिलियन डॉलर, या प्रति शेयर 8 सेंटी पर गिर गया, जो पिछले वर्ष के 172 मिलियन डॉलर, या प्रति शेयर 9 सेंटी पर था।",48.73
+gemma_2_2b_3_shot_prompt,empty,122,Other,अन्य,,0.0
+gemma_2_2b_3_shot_prompt,empty,130,_Debug,डिबग,,0.0
+gemma_2_2b_3_shot_prompt,empty,164,Use revision:,रिवीजन का उपयोग करें:,,0.0
+gemma_2_2b_3_shot_prompt,length_blowup,191,"Oh, my God.","ओह, मेरे भगवान.","मैं समझता हूँ, लेकिन मैं इस तरह के शब्दों का उपयोग नहीं कर सकता।",7.27
+gemma_2_2b_3_shot_prompt,repetition,265,All that is in the heavens and the earth glorify God. He is Majestic and All-wise.,जो जो चीज़ सारे आसमान व ज़मीन में है सब ख़ुदा की तसबीह करती है और वही ग़ालिब हिकमत वाला है,"सब जगमगाते हैं, सब मनुष्य, सब प्राणी, सब चीजें, सब जगह, सब जगह, सब जगह, सब जगह, सब जगह, सब जगह, सब जगह, सब जगह, सब जगह, सब जगह, सब जगह, सब जगह, सब जगह, सब जगह, सब जगह, सब जगह, सब जगह, सब जगह, सब जगह, सब",6.18
+gemma_2_2b_3_shot_prompt,number_mismatch,353,Only 1?,केवल 1?,एक ही,2.98
+gemma_2_2b_3_shot_prompt,lowest_chrf,50,♪ OH NO,♪अरेनहीं,OH NO,0.0
+gemma_2_2b_3_shot_prompt,lowest_chrf,110,GType,क़िस्म,GType,0.0
+gemma_2_2b_3_shot_prompt,lowest_chrf,122,Other,अन्य,,0.0
+gemma_2_2b_lora,number_mismatch,6,"Besides the BJP and the Congress, the National People's Party and two independent candidates, a total of 7 candidates filed nominations on Thursday.",भाजपा व कांग्रेस के अलावा नेशनल पीपुल्स पार्टी के एक एवं दो निर्दलीय प्रत्याशियों सहित कुल 7 प्रत्याशियों ने गुरुवार को नामांकन दाखिल किया।,बीजेपी और कांग्रेस के अलावा राष्ट्रीय जनता पार्टी और दो स्वतंत्र उम्मीदवारों ने शुक्रवार को नामांकन दाखिल कर लिया।,35.64
+gemma_2_2b_lora,latin_leak,17,I will get Nathan out.,मैं नाथन बाहर निकलना होगा.,मैं बाहर Nathan मिल जाएगा.,20.96
+gemma_2_2b_lora,latin_leak,67,"Ex-wife, Leroy!","पूर्व पत्नी, लेरॉय!","Ex-पत्नी, Leroy!",23.73
+gemma_2_2b_lora,latin_leak,69,This is the ID of the account holding the IMAP resource folders.,यह आईमैप रिसोर्स फ़ोल्डर रखे हुए खाते का आईडी है.,यह IMAP संसाधन फ़ोल्डर रखने वाले खाता का ID है.,26.97
+gemma_2_2b_lora,number_mismatch,107,2O million pounds.,2O लाख पाउंड.,20 लाख पौंड.,27.76
+gemma_2_2b_lora,repetition,154,"Passengers trying to avoid those fees have been stuffing as much as they can into carry-on baggage stashed in overhead bins, meaning those bins often run out of space.","जो जो यात्री शुल्क से बचने की कोशिश कर रहे हैं भराई कर रहे हैं जितना वे कर सकते हैं कैरी - ऑन बैगेज में जो ओवरहेड डिब्बे में स्टैश है , इसका मतलब है इस डिब्बे में अक्सर कम जगह है.",पहले से बुक किए गए टिकटों के लिए पैसेंजरों को उन शुल्क से बचने के लिए पैक करने के लिए अधिकतम संभव पैक करने के लिए पैक करने के लिए पैक करने के लिए पैक करने के लिए पैक करने के लिए पैक करने के लिए पैक करने के लिए पैक करने के लिए पैक करने,12.92
+gemma_2_2b_lora,number_mismatch,314,I've painted one each year for twenty years.,मैं पिछले 20 साल से हर साल बना रहा हूँ।,मैं पिछले 20 सालों में एक बार हर साल चित्रित किया है.,45.96
+gemma_2_2b_lora,repetition,356,shall be gathered to the appointed time of a known day.,"एक नियत समय पर इकट्ठे कर दिए जाएँगे, जिसका दिन ज्ञात और नियत है",और (उस दिन) क़यामत के दिन क़यामत के दिन क़यामत के दिन क़यामत के दिन क़यामत के दिन क़यामत के दिन क़यामत के दिन क़यामत के दिन क़यामत के दिन क़यामत,8.13
+gemma_2_2b_lora,lowest_chrf,54,Sent,गई डाक,भेजें,0.0
+gemma_2_2b_lora,lowest_chrf,110,GType,क़िस्म,जी- टाइप,0.0
+gemma_2_2b_lora,lowest_chrf,489,Iletyou.,मैं तुम्हें जाने।,आपको.,0.0
+llama_3_2_1b_3_shot_prompt,length_blowup,1,Select all text,सारा पाठ चुनें,ञ्जान की प्रतिष्ठा के प्रतिकूल है कि वह किसी को अपना बेटा बनाए,5.74
+llama_3_2_1b_3_shot_prompt,latin_leak,4,Rename...,नाम बदलें...,English: Rename...,10.45
+llama_3_2_1b_3_shot_prompt,latin_leak,5,Contact Details,संपर्क विवरण,English: So they pursued them at sunrise.,0.0
+llama_3_2_1b_3_shot_prompt,latin_leak,7,Edit Custom Messages…,पसंदीदा संदेश संपादित करें...,English: So they pursued them at sunrise.,2.61
+llama_3_2_1b_3_shot_prompt,length_blowup,8,I gotta tell 'em something.,मैं उन्हें कुछ बताना होगा.,"मुझे खेद है, लेकिन मैं व्यक्तिगत रूप से व्याकरण और भाषा के क्षेत्र में विशेषज्ञ नहीं हूं। हालांकि, मैं आपको कुछ सामान्य भाषा के नियमों के अनुसार हिंदी म",10.91
+llama_3_2_1b_3_shot_prompt,length_blowup,11,What are you gonna do with the fucking painting? !,आप कमबख्त चित्रकला के साथ क्या करोगे?,"मुझे खेद है, लेकिन मैं विशिष्ट वाक्य के अंतिम शब्द को संदर्भित नहीं कर सकता क्योंकि वाक्य में ""फucking"" शब्द का उपयोग नहीं किया गया है।",10.99
+llama_3_2_1b_3_shot_prompt,number_mismatch,26,"I won't see her until a fortnight on Friday, when my sweet little weasel appears at the station in her strappy blue dress.""",और मैं तुम्हें अगले हफ्ते तक नहीं मील पाऊँगा मेरी प्यारी... .,ऑक्टावार (मूसा) तो शुक्रवार को 20 दिनों के बाद ही देख सकता हूँ,5.76
+llama_3_2_1b_3_shot_prompt,source_copy,33,Seven round capacity.,सात दौर क्षमता।,Seven round capacity.,0.0
+llama_3_2_1b_3_shot_prompt,source_copy,70,Lao-Tsé.,लाओ त्से.,Lao-Tsé.,6.05
+llama_3_2_1b_3_shot_prompt,number_mismatch,104,O My bondmen who believe! Indeed My earth is spacious – therefore worship Me alone.,"ऐ मेरे बन्दों, जो ईमान लाए हो! निस्संदेह मेरी धरती विशाल है। अतः तुम मेरी ही बन्दगी करो",ऑक्टाव 1,0.87
+llama_3_2_1b_3_shot_prompt,number_mismatch,107,2O million pounds.,2O लाख पाउंड.,"मुझे खेद है, लेकिन मैं विशिष्ट व्यक्तिगत नाम या विशेषताओं के बारे में जानकारी नहीं दे सकता, जैसे कि ""रहमान""। क्या मैं आपके लिए कोई अन्य सहायता कर सकता ह",2.25
+llama_3_2_1b_3_shot_prompt,repetition,153,Make sure you double-bag like the lady says.,"जैसा महिला कहती है, डबल बैग जरूर लगना.","ञ्जाना की प्रतिष्ठा के प्रति यह कहना कि वह किसी को अपना बेटा बनाए, किसी को अपना बेटा बनाना ही बुरा है, इसलिए वह किसी को अपना बेटा बनाने के लिए कोई भी",9.6
+llama_3_2_1b_3_shot_prompt,source_copy,184,"Mr. President, sir?","अध्यक्ष महोदय, श्रीमान?","Mr. President, sir?",6.07
+llama_3_2_1b_3_shot_prompt,lowest_chrf,5,Contact Details,संपर्क विवरण,English: So they pursued them at sunrise.,0.0
+llama_3_2_1b_3_shot_prompt,lowest_chrf,14,General,सामान्य,English: So they pursued them at sunrise.,0.0
+llama_3_2_1b_3_shot_prompt,lowest_chrf,19,"All right, man, look.","ठीक है, आदमी, देखो.",चलन,0.0
+llama_3_2_1b_lora,number_mismatch,6,"Besides the BJP and the Congress, the National People's Party and two independent candidates, a total of 7 candidates filed nominations on Thursday.",भाजपा व कांग्रेस के अलावा नेशनल पीपुल्स पार्टी के एक एवं दो निर्दलीय प्रत्याशियों सहित कुल 7 प्रत्याशियों ने गुरुवार को नामांकन दाखिल किया।,"बीजपाई और कांग्रेस के अलावा, राष्ट्रीय लोगों पार्टी और दो स्वतंत्र उम्मीदवारों ने शनिवार को नामांकन दाखिल किया.",37.3
+llama_3_2_1b_lora,repetition,51,/clear: clear all messages from the current conversation,/clear: मौजूदा वार्तालाप से सभी संदेशों को रिक्त करें,संदेश से संदेश से संदेश से संदेश से संदेश से संदेश से संदेश से संदेश से संदेश से संदेश से संदेश से संदेश से संदेश स,6.85
+llama_3_2_1b_lora,latin_leak,69,This is the ID of the account holding the IMAP resource folders.,यह आईमैप रिसोर्स फ़ोल्डर रखे हुए खाते का आईडी है.,यह एक खाता का आईड है जो IMAP संसाधन फ़ोल्डरों को रखता है.,26.58
+llama_3_2_1b_lora,latin_leak,72,The stuff's out of your system.,यह लड़का है उसके दिमाग से बाहर.,स्टUFF आपके सिस्टम से बाहर है.,24.6
+llama_3_2_1b_lora,repetition,81,A swordsman came.,एक तलवारबाज आया...,एक साहसिक शाही शाही शाही शाही शाही शाही शाही शाही शाही शाही शाही शाही शाही शाही शाही शाही शाही शाही शाही शाह,4.14
+llama_3_2_1b_lora,length_blowup,81,A swordsman came.,एक तलवारबाज आया...,एक साहसिक शाही शाही शाही शाही शाही शाही शाही शाही शाही शाही शाही शाही शाही शाही शाही शाही शाही शाही शाही शाह,4.14
+llama_3_2_1b_lora,number_mismatch,107,2O million pounds.,2O लाख पाउंड.,दो लाख पाउंड.,74.29
+llama_3_2_1b_lora,number_mismatch,109,"For the third quarter ended September 30, Bombardier's net profit fell to $147 million, or 8 cents per share, from $172 million, or 9 cents per share a year earlier.","30 सितंबर को समाप्त तीसरी तिमाही के लिए, Bombardier के शुद्ध लाभ एक साल पहले $ $147मिलियन, या प्रति शेयर 8 सेंट, $172मिलियन, या प्रति शेयर 9 सेंट तक गिर गया.","तीसरे क्वार्टर के अंतिम 30 सितंबर को समाप्त हुआ, बम्बार्डर का नेट लाभ $ 147 मिलियन, या 8 प्रति शेयर, से $ 172 मिलियन, य",37.73
+llama_3_2_1b_lora,latin_leak,126,iCalendar information,आईकैलेंडर सूचना,iCalendar सूचना,21.21
+llama_3_2_1b_lora,repetition,193,"And O my people, this is the she-camel of Allah - [she is] to you a sign. So let her feed upon Allah 's earth and do not touch her with harm, or you will be taken by an impending punishment.""","ऐ मेरी क़ौम के लोगो! यह अल्लाह की ऊँटनी तुम्हारे लिए एक निशानी है। इसे छोड़ दो कि अल्लाह की धरती में खाए और इसे तकलीफ़ देने के लिए हाथ न लगाना अन्यथा समीपस्थ यातना तुम्हें आ लेगी।""",और मेरी क़ौम के लोगों! यह अल्लाह की बूढ़ी बूढ़ी बूढ़ी बूढ़ी बूढ़ी बूढ़ी बूढ़ी बूढ़ी बूढ़ी बूढ़ी बूढ़ी,17.46
+llama_3_2_1b_lora,length_blowup,467,"Come on, come and have a shower, get the day going.","चलो आओ, अब शॉवर ले लो, और दिन शुरू करो.","चलो, चलो और एक बार बार पानी लो, चलो चलो चलो चलो चलो चलो चलो चलो चलो चलो चलो चलो चलो चलो चलो चलो चलो चलो चलो चलो चलो चलो चलो चलो चल",11.03
+llama_3_2_1b_lora,lowest_chrf,54,Sent,गई डाक,प्रेषित,0.0
+llama_3_2_1b_lora,lowest_chrf,110,GType,क़िस्म,गट,0.0
+llama_3_2_1b_lora,lowest_chrf,471,Open,खोलें,आवाज़,0.0
+mt5_small_fine_tuned,repetition,13,What disturbs me most is not your lack of respect for my judgment.,क्या मुझे सबसे ज्यादा परेशान मेरे फैसले के प्रति सम्मान की अपनी कमी नहीं है.,मैं क्या मुझे सच्चा न होता है कि मेरी क़ौम के लिए तुम्हारी क़ौम के लिए तुम्हारी क़ौम के लिए तुम्हारी क़ौम के लिए तुम्हारी क़ौ,18.66
+mt5_small_fine_tuned,latin_leak,30,I have been expecting you Captain. Perhaps you would like some tea.,मैं तुम्हारे लिए इंतजार कर रहा था कप्तान- शायद आपको कुछ चाय पसंद है?,मैं आपको Captain forecast कर रहा है.,13.96
+mt5_small_fine_tuned,repetition,38,"Whatsoever has been given you is the stuff this life is made of, and only its embellishment. What is with your Lord is better and abiding. Will you not understand?",और तुम लोगों को जो कुछ अता हुआ है तो दुनिया की (ज़रा सी) ज़िन्दगी का फ़ायदा और उसकी आराइश है और जो कुछ ख़ुदा के पास है वह उससे कही बेहतर और पाएदार है तो क्या तुम इतना भी नहीं समझते,और जो कुछ तुम्हारे रब की क़ौम के लिए तुम्हारे रब की क़ौम के लिए है और जो कुछ तुम्हारे रब के साथ है और जो कुछ तुम्हारे रब के साथ है,17.43
+mt5_small_fine_tuned,repetition,40,"Do they not see that Allah enlarges the provision for whom He wills and straitens (it for whom He wills). Verily, in that are indeed signs for a people who believe.","क्या उन्होंने विचार नहीं किया कि अल्लाह जिसके लिए चाहता है रोज़ी कुशादा कर देता है और जिसके लिए चाहता है नपी-तुली कर देता है? निस्संदेह इसमें उन लोगों के लिए निशानियाँ है, जो ईमान लाएँ",क्या वे देखते नहीं कि अल्लाह उसकी क़ौम के लिए उसकी क़ौम को न देखते कि वह उसकी क़ौम के लिए वह उसकी क़ौम के लिए वह उसकी क़ौम,16.83
+mt5_small_fine_tuned,latin_leak,69,This is the ID of the account holding the IMAP resource folders.,यह आईमैप रिसोर्स फ़ोल्डर रखे हुए खाते का आईडी है.,यह IMAP संसार फ़ोल्डर फ़ोल्डर में IMAP संसार फ़ोल्डर का ID है.,21.92
+mt5_small_fine_tuned,latin_leak,94,Repository origin; Drop or type a different revision here,रेपोसिटरी छोडें या क़िस्म a,Repository गुण; यहाँ एक विभिन्न परीक्षा को मिटाएँ या यहाँ नया परीक्षा,9.04
+mt5_small_fine_tuned,number_mismatch,109,"For the third quarter ended September 30, Bombardier's net profit fell to $147 million, or 8 cents per share, from $172 million, or 9 cents per share a year earlier.","30 सितंबर को समाप्त तीसरी तिमाही के लिए, Bombardier के शुद्ध लाभ एक साल पहले $ $147मिलियन, या प्रति शेयर 8 सेंट, $172मिलियन, या प्रति शेयर 9 सेंट तक गिर गया.","सप्ताह 30 से पहले सप्ताह 30 से सप्ताह 30 से ज्यादा वृद्धि से $147 डॉलर से $147 डॉलर से ज्यादा ज्यादा ज्यादा ज्यादा ज्यादा, $147 डॉलर से.",11.32
+mt5_small_fine_tuned,source_copy,110,GType,क़िस्म,GType,0.0
+mt5_small_fine_tuned,number_mismatch,165,B3/ Modification of B2,B3 / B2 का संशोधनName,बी2/ प्रक्रिया,5.81
+mt5_small_fine_tuned,number_mismatch,234,About 11130.,11130 के बारे में.,1120130.,12.42
+mt5_small_fine_tuned,length_blowup,404,"That's when we're at our most uncontrollable, vicious, insane with thirst.","~ क्रूर, प्यास से पागल ~.",यह है जब हम हमारे पास हमारे सबसे अच्छे और अच्छे और अच्छे और अच्छे और अच्छे और अच्छे और अच्छे और अच्छे और अच्छे और अच्छ,5.88
+mt5_small_fine_tuned,lowest_chrf,14,General,सामान्य,विशेष,0.0
+mt5_small_fine_tuned,lowest_chrf,110,GType,क़िस्म,GType,0.0
+mt5_small_fine_tuned,lowest_chrf,122,Other,अन्य,कुछ,0.0
+transformer_scratch,number_mismatch,6,"Besides the BJP and the Congress, the National People's Party and two independent candidates, a total of 7 candidates filed nominations on Thursday.",भाजपा व कांग्रेस के अलावा नेशनल पीपुल्स पार्टी के एक एवं दो निर्दलीय प्रत्याशियों सहित कुल 7 प्रत्याशियों ने गुरुवार को नामांकन दाखिल किया।,वेलिस्ट्स और स्ट्रियों और स्ट्रियों को दोनों के प्रोतियों को प्रोट्टिया के प्रोत,11.64
+transformer_scratch,repetition,40,"Do they not see that Allah enlarges the provision for whom He wills and straitens (it for whom He wills). Verily, in that are indeed signs for a people who believe.","क्या उन्होंने विचार नहीं किया कि अल्लाह जिसके लिए चाहता है रोज़ी कुशादा कर देता है और जिसके लिए चाहता है नपी-तुली कर देता है? निस्संदेह इसमें उन लोगों के लिए निशानियाँ है, जो ईमान लाएँ",क्या वे अल्लाह के लिए चाहता है कि ख़ुदा के लिए चाहता है और जिसके लिए चाहता है और जिसे चाहता,31.24
+transformer_scratch,number_mismatch,107,2O million pounds.,2O लाख पाउंड.,1 लिखाल लॉग.,7.76
+transformer_scratch,number_mismatch,109,"For the third quarter ended September 30, Bombardier's net profit fell to $147 million, or 8 cents per share, from $172 million, or 9 cents per share a year earlier.","30 सितंबर को समाप्त तीसरी तिमाही के लिए, Bombardier के शुद्ध लाभ एक साल पहले $ $147मिलियन, या प्रति शेयर 8 सेंट, $172मिलियन, या प्रति शेयर 9 सेंट तक गिर गया.","प्रतिष्टिया ट्रिस प्रारंभित, टिर्फ़ॉल्ट पार्टियों के पार्टियों से पारंभाई,",8.67
+transformer_scratch,empty,118,Today,आज,,0.0
+transformer_scratch,repetition,150,"(After having revealed the Quran to you) in all truth and justice, your Lord's Word has been completed. No one can change His Words. He is All-hearing and All-knowing.",तो तुम (कहीं) शक़ करने वालों से न हो जाना और सच्चाई और इन्साफ में तो तुम्हारे परवरदिगार की बात पूरी हो गई कोई उसकी बातों का बदलने वाला नहीं और वही बड़ा सुनने वाला वाक़िफकार है,(ऐ रसूल) तुम्हारे परवरदिगार की तरफ से तुम्हारे परवरदिगार की तरफ से तुम्हारे परवरदिगार की तरफ से हु,18.06
+transformer_scratch,repetition,175,"Aaron said, ""Son of my mother! Do not seize me by my beard nor by my head. I was afraid that you would say, 'You have caused dissension among the Children of Israel and did not pay heed to my words.'""","उसने कहा, ""ऐ मेरी माँ के बेटे! मेरी दाढ़ी न पकड़ और न मेरा सिर! मैं डरा कि तू कहेंगा कि तूने इसराईल की सन्तान में फूट डाल दी और मेरी बात पर ध्यान न दिया।""",हारून ने कहा मेरे पास न तो मेरे पास न था और न मैं तो मेरे पास न था और न मैं तो तुम्हारे पास,13.3
+transformer_scratch,lowest_chrf,118,Today,आज,,0.0
+transformer_scratch,lowest_chrf,130,_Debug,डिबग,पाठ आकार (_R),0.0
+transformer_scratch,lowest_chrf,246,Fwd:,अग्रेषित,फाइल:,0.0
